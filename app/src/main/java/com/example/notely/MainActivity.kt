@@ -29,16 +29,17 @@ class MainActivity : AppCompatActivity() {
         if (ContextCompat.checkSelfPermission(this,android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
             Toast.makeText(this, "Permissions already granted", Toast.LENGTH_SHORT).show()
         } else {
-            this.requestPermissions()
+            this.sendPermissionRequest()
         }
     }
 
-    private fun requestPermissions() {
+    private fun sendPermissionRequest() {
         if(ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)) {
             AlertDialog.Builder(this)
                 .setTitle("Permission needed")
                 .setMessage("This is needed")
                 .setPositiveButton("Ok") { DialogInterface, which ->
+                    ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), STORAGE_PERMISSION_CODE)
                     Log.i("Permissions", "User pressed OK")
                 }
                 .setNegativeButton("Cancel") { DialogInterface, which ->
