@@ -1,7 +1,5 @@
 package com.example.notely
 
-import android.app.Dialog
-import android.content.DialogInterface
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,8 +9,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import kotlinx.android.synthetic.main.activity_main.*
-import java.util.jar.Manifest
 
 class MainActivity : AppCompatActivity() {
     private val STORAGE_PERMISSION_CODE: Int = 1
