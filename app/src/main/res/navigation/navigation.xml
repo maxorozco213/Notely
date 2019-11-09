@@ -29,8 +29,8 @@
         android:label="fragment_camera"
         tools:layout="@layout/fragment_camera" >
         <action
-            android:id="@+id/action_camera_to_menu"
-            app:destination="@id/menu" />
+            android:id="@+id/action_camera_to_photoedit"
+            app:destination="@id/photoedit" />
     </fragment>
     <fragment
         android:id="@+id/folders"
@@ -58,5 +58,14 @@
         <action
             android:id="@+id/action_userinfo_to_menu"
             app:destination="@id/menu" />
+    </fragment>
+    <fragment
+        android:id="@+id/photoedit"
+        android:name="com.example.notely.photoedit"
+        android:label="fragment_photoedit"
+        tools:layout="@layout/fragment_photoedit" >
+        <action
+            android:id="@+id/action_photoedit_to_folders"
+            app:destination="@id/folders" />
     </fragment>
 </navigation>

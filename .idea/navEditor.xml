@@ -97,7 +97,24 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_menu_to_userinfo">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                           </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="photoedit">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="239" />
+                            <option name="y" value="-250" />
+                          </Point>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -110,6 +127,15 @@
                             <option name="x" value="-668" />
                             <option name="y" value="375" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_userinfo_to_menu">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
