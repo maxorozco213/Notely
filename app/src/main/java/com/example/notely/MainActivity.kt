@@ -30,7 +30,6 @@ class MainActivity : AppCompatActivity() {
     private  val RC_SIGN_IN = 9001
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
-    private lateinit var root: ConstraintLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +49,8 @@ class MainActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         val btn = findViewById<SignInButton>(R.id.sign_in_button)
         btn.setOnClickListener{ signIn() }
+        val out = findViewById<Button>(R.id.button)
+        out.setOnClickListener { signOut() }
     }
 
     private fun checkPermissions() {
@@ -99,6 +100,11 @@ class MainActivity : AppCompatActivity() {
     private fun signIn() {
         val signInIntent = googleSignInClient.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)
+    }
+
+    private fun signOut() {
+        auth.signOut()
+        updateUI(auth.currentUser)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
