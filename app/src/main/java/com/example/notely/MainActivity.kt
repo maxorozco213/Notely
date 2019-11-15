@@ -22,10 +22,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        //Max aint showing up to meetings - The whole team
         
         //val requestPermissions: Button  = findViewById(R.id.permissionButton)
         //requestPermissions.setOnClickListener{this.checkPermissions()}
+        checkPermissions()
     }
 
     private fun checkPermissions() {

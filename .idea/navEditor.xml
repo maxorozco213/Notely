@@ -19,7 +19,7 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_camera_to_menu">
+                            <entry key="action_camera_to_photoedit">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -115,6 +115,15 @@
                             <option name="x" value="239" />
                             <option name="y" value="-250" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_photoedit_to_folders">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>

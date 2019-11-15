@@ -69,6 +69,7 @@ class Login_register : Fragment() {
                 //Log.w(TAG, "Google sign in failed", e)
                 // ...
                 println("Google sign in failed")
+                e.printStackTrace()
             }
         }
     }
