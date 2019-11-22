@@ -8,6 +8,27 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
+                  <entry key="Folders">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="12" />
+                            <option name="y" value="12" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_folders_to_menu">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="camera">
                     <value>
                       <LayoutPositions>
@@ -20,27 +41,6 @@
                         <option name="myPositions">
                           <map>
                             <entry key="action_camera_to_photoedit">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                          </map>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
-                  <entry key="folders">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="-75" />
-                            <option name="y" value="167" />
-                          </Point>
-                        </option>
-                        <option name="myPositions">
-                          <map>
-                            <entry key="action_folders_to_menu">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -82,12 +82,12 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_menu_to_camera">
+                            <entry key="action_menu_to_Folders">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_menu_to_folders">
+                            <entry key="action_menu_to_camera">
                               <value>
                                 <LayoutPositions />
                               </value>

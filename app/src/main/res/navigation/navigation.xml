@@ -3,19 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/login_register">
+    app:startDestination="@+id/Folders">
 
     <fragment
         android:id="@+id/menu"
         android:name="com.example.notely.title"
         android:label="fragment_menu"
-        tools:layout="@layout/fragment_title" >
+        tools:layout="@layout/fragment_title">
         <action
             android:id="@+id/action_menu_to_camera"
             app:destination="@id/camera" />
         <action
-            android:id="@+id/action_menu_to_folders"
-            app:destination="@id/folders" />
+            android:id="@+id/action_menu_to_Folders"
+            app:destination="@id/Folders" />
         <action
             android:id="@+id/action_menu_to_login_register"
             app:destination="@id/login_register" />
@@ -27,16 +27,16 @@
         android:id="@+id/camera"
         android:name="com.example.notely.camera"
         android:label="fragment_camera"
-        tools:layout="@layout/fragment_camera" >
+        tools:layout="@layout/fragment_camera">
         <action
             android:id="@+id/action_camera_to_photoedit"
             app:destination="@id/photoedit" />
     </fragment>
     <fragment
-        android:id="@+id/folders"
-        android:name="com.example.notely.folders"
+        android:id="@+id/Folders"
+        android:name="com.example.notely.Folders"
         android:label="fragment_folders"
-        tools:layout="@layout/fragment_folders" >
+        tools:layout="@layout/fragment_folders">
         <action
             android:id="@+id/action_folders_to_menu"
             app:destination="@id/menu" />
@@ -45,7 +45,7 @@
         android:id="@+id/login_register"
         android:name="com.example.notely.Login_register"
         android:label="fragment_login_register"
-        tools:layout="@layout/fragment_login_register" >
+        tools:layout="@layout/fragment_login_register">
         <action
             android:id="@+id/action_login_register_to_menu"
             app:destination="@id/menu" />
@@ -54,7 +54,7 @@
         android:id="@+id/userinfo"
         android:name="com.example.notely.userinfo"
         android:label="fragment_userinfo"
-        tools:layout="@layout/fragment_userinfo" >
+        tools:layout="@layout/fragment_userinfo">
         <action
             android:id="@+id/action_userinfo_to_menu"
             app:destination="@id/menu" />
@@ -63,9 +63,9 @@
         android:id="@+id/photoedit"
         android:name="com.example.notely.photoedit"
         android:label="fragment_photoedit"
-        tools:layout="@layout/fragment_photoedit" >
+        tools:layout="@layout/fragment_photoedit">
         <action
             android:id="@+id/action_photoedit_to_folders"
-            app:destination="@id/folders" />
+            app:destination="@id/Folders" />
     </fragment>
 </navigation>
