@@ -2,25 +2,28 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".title">
+    tools:context=".Menu">
+
+    <data>
+        <variable
+            name="menu"
+            type="com.example.notely.Menu" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/Notely_Title"
+            android:id="@+id/notely_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="124dp"
             android:layout_marginTop="128dp"
-            android:text="@string/notely_Title"
+            android:text="@string/notely_title"
             android:textSize="55sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

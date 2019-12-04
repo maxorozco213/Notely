@@ -6,22 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import com.example.notely.databinding.FragmentFoldersBinding
+import com.example.notely.databinding.FragmentMenuBinding
 
-class Folders: Fragment() {
+class Menu: Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        val binding = DataBindingUtil.inflate<FragmentFoldersBinding>(
-            inflater, R.layout.fragment_folders, container, false)
-        binding.folders = this
-
-//        FilePickerBuilder.instance
-//            .setSelectedFiles()
-//            .pickPhoto(this)
+        val binding = DataBindingUtil.inflate<FragmentMenuBinding>(
+            inflater, R.layout.fragment_menu, container, false)
+        binding.menu = this
 
         return binding.root
     }

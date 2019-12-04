@@ -3,13 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@+id/Folders">
+    app:startDestination="@id/menu">
 
     <fragment
         android:id="@+id/menu"
-        android:name="com.example.notely.title"
-        android:label="fragment_menu"
-        tools:layout="@layout/fragment_title">
+        android:name="com.example.notely.Menu"
+        android:label="fragment_menu">
         <action
             android:id="@+id/action_menu_to_camera"
             app:destination="@id/camera" />
