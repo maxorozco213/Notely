@@ -18,6 +18,10 @@ class Menu: Fragment() {
             inflater, R.layout.fragment_menu, container, false)
         binding.menu = this
 
+
+
         return binding.root
     }
+
+
 }

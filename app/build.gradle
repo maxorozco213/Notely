@@ -27,10 +27,6 @@ android {
     }
 }
 
-repositories {
-    maven { url = uri('https://jitpack.io') }
-}
-
 dependencies {
     implementation 'com.droidninja:filepicker:2.2.1'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -48,5 +44,4 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:17.2.1'
     implementation 'com.google.firebase:firebase-auth:19.2.0'
     implementation 'com.google.android.gms:play-services-auth:17.0.0'
-    implementation 'com.github.ibrahimsn98:SmoothBottomBar:1.6'
 }
