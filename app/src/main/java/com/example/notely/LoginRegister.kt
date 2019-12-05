@@ -17,7 +17,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 
-class Login_register : Fragment() {
+class LoginRegister : Fragment() {
 
     private lateinit var binding: FragmentLoginRegisterBinding
     private val TAG = "Google Sign In Activity"

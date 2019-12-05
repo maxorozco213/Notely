@@ -3,65 +3,65 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/menu">
+    app:startDestination="@id/navigation_menu">
 
     <fragment
-        android:id="@+id/menu"
+        android:id="@+id/navigation_menu"
         android:name="com.example.notely.Menu"
-        android:label="fragment_menu">
+        android:label="Menu">
         <action
             android:id="@+id/action_menu_to_camera"
-            app:destination="@id/camera" />
+            app:destination="@id/Camera" />
         <action
             android:id="@+id/action_menu_to_Folders"
             app:destination="@id/Folders" />
         <action
             android:id="@+id/action_menu_to_login_register"
-            app:destination="@id/login_register" />
+            app:destination="@id/navigation_login" />
         <action
-            android:id="@+id/action_menu_to_userinfo"
-            app:destination="@id/userinfo" />
+            android:id="@+id/action_menu_to_user"
+            app:destination="@id/navigation_user" />
     </fragment>
     <fragment
-        android:id="@+id/camera"
-        android:name="com.example.notely.camera"
-        android:label="fragment_camera"
+        android:id="@+id/Camera"
+        android:name="com.example.notely.Camera"
+        android:label="Camera"
         tools:layout="@layout/fragment_camera">
         <action
             android:id="@+id/action_camera_to_photoedit"
-            app:destination="@id/photoedit" />
+            app:destination="@id/navigtion_edit" />
     </fragment>
     <fragment
         android:id="@+id/Folders"
         android:name="com.example.notely.Folders"
-        android:label="fragment_folders"
+        android:label="Folders"
         tools:layout="@layout/fragment_folders">
         <action
             android:id="@+id/action_folders_to_menu"
-            app:destination="@id/menu" />
+            app:destination="@id/navigation_menu" />
     </fragment>
     <fragment
-        android:id="@+id/login_register"
-        android:name="com.example.notely.Login_register"
-        android:label="fragment_login_register"
+        android:id="@+id/navigation_login"
+        android:name="com.example.notely.LoginRegister"
+        android:label="Login"
         tools:layout="@layout/fragment_login_register">
         <action
             android:id="@+id/action_login_register_to_menu"
-            app:destination="@id/menu" />
+            app:destination="@id/navigation_menu" />
     </fragment>
     <fragment
-        android:id="@+id/userinfo"
-        android:name="com.example.notely.userinfo"
-        android:label="fragment_userinfo"
-        tools:layout="@layout/fragment_userinfo">
+        android:id="@+id/navigation_user"
+        android:name="com.example.notely.User"
+        android:label="User Info"
+        tools:layout="@layout/fragment_user">
         <action
-            android:id="@+id/action_userinfo_to_menu"
-            app:destination="@id/menu" />
+            android:id="@+id/action_user_to_menu"
+            app:destination="@id/navigation_menu" />
     </fragment>
     <fragment
-        android:id="@+id/photoedit"
-        android:name="com.example.notely.photoedit"
-        android:label="fragment_photoedit"
+        android:id="@+id/navigtion_edit"
+        android:name="com.example.notely.PhotoEdit"
+        android:label="Photo Edit"
         tools:layout="@layout/fragment_photoedit">
         <action
             android:id="@+id/action_photoedit_to_folders"

@@ -16,12 +16,12 @@ private const val ARG_PARAM2 = "param2"
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
- * [photoedit.OnFragmentInteractionListener] interface
+ * [camera.OnFragmentInteractionListener] interface
  * to handle interaction events.
- * Use the [photoedit.newInstance] factory method to
+ * Use the [camera.newInstance] factory method to
  * create an instance of this fragment.
  */
-class photoedit : Fragment() {
+class Camera : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -40,7 +40,7 @@ class photoedit : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_photoedit, container, false)
+        return inflater.inflate(R.layout.fragment_camera, container, false)
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -85,12 +85,12 @@ class photoedit : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment photoedit.
+         * @return A new instance of fragment camera.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            photoedit().apply {
+            Camera().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
