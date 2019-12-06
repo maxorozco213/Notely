@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_user">
+
+    <fragment
+        android:id="@+id/navigation_user"
+        android:name="com.example.notely.ui.user.UserFragment"
+        android:label="@string/user_nav"
+        tools:layout="@layout/fragment_user" />
+
+    <fragment
+        android:id="@+id/navigation_camera"
+        android:name="com.example.notely.ui.camera.CameraFragment"
+        android:label="@string/cam_nav"
+        tools:layout="@layout/fragment_camera" />
+
+    <fragment
+        android:id="@+id/navigation_files"
+        android:name="com.example.notely.ui.files.FilesFragment"
+        android:label="@string/file_nav"
+        tools:layout="@layout/fragment_files" />
+</navigation>

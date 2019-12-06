@@ -3,20 +3,60 @@
   <component name="navEditor-manualLayoutAlgorithm2">
     <option name="myPositions">
       <map>
+        <entry key="mobile_navigation.xml">
+          <value>
+            <LayoutPositions>
+              <option name="myPositions">
+                <map>
+                  <entry key="navigation_dashboard">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="256" />
+                            <option name="y" value="12" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="navigation_home">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="12" />
+                            <option name="y" value="12" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="navigation_notifications">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="12" />
+                            <option name="y" value="368" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </LayoutPositions>
+          </value>
+        </entry>
         <entry key="navigation.xml">
           <value>
             <LayoutPositions>
               <option name="myPositions">
                 <map>
-                  <entry key="camera">
+                  <entry key="Camera">
                     <value>
                       <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="-77" />
-                            <option name="y" value="-248" />
-                          </Point>
-                        </option>
                         <option name="myPositions">
                           <map>
                             <entry key="action_camera_to_photoedit">
@@ -29,15 +69,9 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="folders">
+                  <entry key="Folders">
                     <value>
                       <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="-75" />
-                            <option name="y" value="167" />
-                          </Point>
-                        </option>
                         <option name="myPositions">
                           <map>
                             <entry key="action_folders_to_menu">
@@ -50,15 +84,9 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="login_register">
+                  <entry key="navigation_login">
                     <value>
                       <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="-670" />
-                            <option name="y" value="-18" />
-                          </Point>
-                        </option>
                         <option name="myPositions">
                           <map>
                             <entry key="action_login_register_to_menu">
@@ -71,23 +99,17 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="menu">
+                  <entry key="navigation_menu">
                     <value>
                       <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="-359" />
-                            <option name="y" value="-21" />
-                          </Point>
-                        </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_menu_to_camera">
+                            <entry key="action_menu_to_Folders">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_menu_to_folders">
+                            <entry key="action_menu_to_camera">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -97,7 +119,7 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_menu_to_userinfo">
+                            <entry key="action_menu_to_user">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -107,39 +129,27 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="photoedit">
+                  <entry key="navigation_user">
                     <value>
                       <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="239" />
-                            <option name="y" value="-250" />
-                          </Point>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_user_to_menu">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="navigtion_edit">
+                    <value>
+                      <LayoutPositions>
                         <option name="myPositions">
                           <map>
                             <entry key="action_photoedit_to_folders">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                          </map>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
-                  <entry key="userinfo">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="-668" />
-                            <option name="y" value="375" />
-                          </Point>
-                        </option>
-                        <option name="myPositions">
-                          <map>
-                            <entry key="action_userinfo_to_menu">
                               <value>
                                 <LayoutPositions />
                               </value>
