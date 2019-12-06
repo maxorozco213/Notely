@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class FilesViewModel : ViewModel() {
+    val permissionsRequest = MutableLiveData<String>()
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is files Fragment"

@@ -5,10 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.notely.R
+import com.example.notely.databinding.FragmentFilesBinding
 
 class FilesFragment : Fragment() {
     private lateinit var filesViewModel: FilesViewModel
@@ -20,11 +22,16 @@ class FilesFragment : Fragment() {
     ): View? {
         filesViewModel =
             ViewModelProviders.of(this).get(FilesViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_files, container, false)
-        val textView: TextView = root.findViewById(R.id.text_notifications)
+
+        val binding = DataBindingUtil.inflate<FragmentFilesBinding>(
+            inflater, R.layout.fragment_files, container, false)
+        binding.files = this
+
+        val textView: TextView = binding.textFiles
+
         filesViewModel.text.observe(this, Observer {
             textView.text = it
         })
-        return root
+        return binding.root
     }
 }

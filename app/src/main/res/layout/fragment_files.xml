@@ -3,6 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Folders">
+    
+    <data>
+        <variable
+            name="files"
+            type="com.example.notely.ui.files.FilesFragment" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/folderFragment"
@@ -10,7 +16,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/text_notifications"
+            android:id="@+id/text_files"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
