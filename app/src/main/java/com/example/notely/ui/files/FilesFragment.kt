@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.notely.R
 
 class FilesFragment : Fragment() {
-
     private lateinit var filesViewModel: FilesViewModel
 
     override fun onCreateView(
