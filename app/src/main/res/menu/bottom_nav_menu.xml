@@ -7,7 +7,7 @@
         android:title="@string/user_nav" />
 
     <item
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_camera"
         android:icon="@drawable/icons8_camera_24"
         android:title="@string/cam_nav" />
 

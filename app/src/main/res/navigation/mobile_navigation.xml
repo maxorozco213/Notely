@@ -9,13 +9,13 @@
         android:id="@+id/navigation_user"
         android:name="com.example.notely.ui.user.UserFragment"
         android:label="@string/user_nav"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_user" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.notely.ui.dashboard.DashboardFragment"
+        android:id="@+id/navigation_camera"
+        android:name="com.example.notely.ui.dashboard.CameraFragment"
         android:label="@string/cam_nav"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_camera" />
 
     <fragment
         android:id="@+id/navigation_notifications"

@@ -24,7 +24,7 @@ class Folders: Fragment()  {
     ): View? {
 
         val binding = DataBindingUtil.inflate<FragmentFoldersBinding>(
-            inflater, R.layout.fragment_folders, container, false)
+            inflater, R.layout.fragment_files, container, false)
         binding.folders = this
 
         checkPermissions()
