@@ -1,4 +1,4 @@
-package com.example.notely.ui.dashboard
+package com.example.notely.ui.files
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,20 +10,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.notely.R
 
-class CameraFragment : Fragment() {
+class FilesFragment : Fragment() {
 
-    private lateinit var cameraViewModel: CameraViewModel
+    private lateinit var filesViewModel: FilesViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        cameraViewModel =
-            ViewModelProviders.of(this).get(CameraViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_camera, container, false)
-        val textView: TextView = root.findViewById(R.id.text_dashboard)
-        cameraViewModel.text.observe(this, Observer {
+        filesViewModel =
+            ViewModelProviders.of(this).get(FilesViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_files, container, false)
+        val textView: TextView = root.findViewById(R.id.text_notifications)
+        filesViewModel.text.observe(this, Observer {
             textView.text = it
         })
         return root

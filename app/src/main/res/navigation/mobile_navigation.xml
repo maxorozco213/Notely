@@ -13,13 +13,13 @@
 
     <fragment
         android:id="@+id/navigation_camera"
-        android:name="com.example.notely.ui.dashboard.CameraFragment"
+        android:name="com.example.notely.ui.camera.CameraFragment"
         android:label="@string/cam_nav"
         tools:layout="@layout/fragment_camera" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.notely.ui.notifications.NotificationsFragment"
+        android:id="@+id/navigation_files"
+        android:name="com.example.notely.ui.files.FilesFragment"
         android:label="@string/file_nav"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_files" />
 </navigation>

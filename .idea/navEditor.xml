@@ -57,12 +57,6 @@
                   <entry key="Camera">
                     <value>
                       <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="609" />
-                            <option name="y" value="209" />
-                          </Point>
-                        </option>
                         <option name="myPositions">
                           <map>
                             <entry key="action_camera_to_photoedit">
@@ -78,12 +72,6 @@
                   <entry key="Folders">
                     <value>
                       <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="121" />
-                            <option name="y" value="209" />
-                          </Point>
-                        </option>
                         <option name="myPositions">
                           <map>
                             <entry key="action_folders_to_menu">
@@ -96,15 +84,9 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="login_register">
+                  <entry key="navigation_login">
                     <value>
                       <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="-561" />
-                            <option name="y" value="179" />
-                          </Point>
-                        </option>
                         <option name="myPositions">
                           <map>
                             <entry key="action_login_register_to_menu">
@@ -120,12 +102,6 @@
                   <entry key="navigation_menu">
                     <value>
                       <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="-100" />
-                            <option name="y" value="-148" />
-                          </Point>
-                        </option>
                         <option name="myPositions">
                           <map>
                             <entry key="action_menu_to_Folders">
@@ -156,12 +132,6 @@
                   <entry key="navigation_user">
                     <value>
                       <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="-223" />
-                            <option name="y" value="200" />
-                          </Point>
-                        </option>
                         <option name="myPositions">
                           <map>
                             <entry key="action_user_to_menu">
@@ -174,15 +144,9 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="photoedit">
+                  <entry key="navigtion_edit">
                     <value>
                       <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="348" />
-                            <option name="y" value="-53" />
-                          </Point>
-                        </option>
                         <option name="myPositions">
                           <map>
                             <entry key="action_photoedit_to_folders">

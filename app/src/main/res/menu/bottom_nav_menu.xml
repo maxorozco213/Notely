@@ -12,7 +12,7 @@
         android:title="@string/cam_nav" />
 
     <item
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_files"
         android:icon="@drawable/icons8_folder_24"
         android:title="@string/file_nav" />
 
