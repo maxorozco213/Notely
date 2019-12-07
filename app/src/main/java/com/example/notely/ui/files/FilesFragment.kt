@@ -32,6 +32,7 @@ class FilesFragment : Fragment() {
         filesViewModel.text.observe(this, Observer {
             textView.text = it
         })
+
         return binding.root
     }
 }

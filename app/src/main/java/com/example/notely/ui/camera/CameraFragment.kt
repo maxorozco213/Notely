@@ -13,7 +13,6 @@ import com.example.notely.R
 import com.example.notely.databinding.FragmentCameraBinding
 
 class CameraFragment : Fragment() {
-
     private lateinit var cameraViewModel: CameraViewModel
 
     override fun onCreateView(
@@ -33,6 +32,7 @@ class CameraFragment : Fragment() {
         cameraViewModel.text.observe(this, Observer {
             textView.text = it
         })
+
         return binding.root
     }
 }

@@ -14,7 +14,6 @@ import com.example.notely.databinding.FragmentFilesBinding
 import com.example.notely.databinding.FragmentUserBinding
 
 class UserFragment : Fragment() {
-
     private lateinit var userViewModel: UserViewModel
 
     override fun onCreateView(
