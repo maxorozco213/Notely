@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 
 class SplashActivity : AppCompatActivity() {
     private var delayHandler: Handler? = null
-    private val splashTimeOut = 3000L
+    private val splashTimeOut = 2000L
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
