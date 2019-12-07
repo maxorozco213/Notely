@@ -15,6 +15,10 @@ import com.example.notely.databinding.FragmentFilesBinding
 class FilesFragment : Fragment() {
     private lateinit var filesViewModel: FilesViewModel
 
+    companion object {
+        private const val ARG_PATH: String = "com.thetechnocafe.gurleensethi.kotlinfileexplorer.fileslist.path"
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -35,4 +39,5 @@ class FilesFragment : Fragment() {
 
         return binding.root
     }
+
 }
