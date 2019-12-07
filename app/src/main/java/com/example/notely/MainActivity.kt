@@ -16,6 +16,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
     private val STORAGE_PERMISSION_CODE: Int = 1
+    private val permissionsArray = arrayOf(
+            android.Manifest.permission.INTERNET,
+            android.Manifest.permission.READ_EXTERNAL_STORAGE
+    )
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,9 +42,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkPermissions() {
-        if (ContextCompat.checkSelfPermission(this,android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
-            Toast.makeText(this, "Permissions already granted", Toast.LENGTH_SHORT).show()
-        } else {
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
+            Log.i("PERMISSIONS", "Storage granted")
+        } else if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.INTERNET) == PackageManager.PERMISSION_GRANTED) {
+            Log.i("PERMISSIONS", "Internet granted")
+        }
+        else {
             this.sendPermissionRequest()
         }
     }
@@ -49,17 +56,17 @@ class MainActivity : AppCompatActivity() {
         if(ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)) {
             AlertDialog.Builder(this)
                 .setTitle("Permission needed")
-                .setMessage("This is needed")
+                .setMessage("Notely needs permissions to save and read files on your device")
                 .setPositiveButton("Ok") { _, _ ->
-                    ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), STORAGE_PERMISSION_CODE)
-                    Log.i("Permissions", "User pressed OK")
+                    ActivityCompat.requestPermissions(this, permissionsArray, STORAGE_PERMISSION_CODE)
+                    Log.i("Permissions", "Permissions granted")
                 }
                 .setNegativeButton("Cancel") { _, _ ->
                     Log.i("Permissions", "Storage permission denied")
                 }
                 .show()
         } else {
-            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), STORAGE_PERMISSION_CODE)
+            ActivityCompat.requestPermissions(this, permissionsArray, STORAGE_PERMISSION_CODE)
         }
     }
 
