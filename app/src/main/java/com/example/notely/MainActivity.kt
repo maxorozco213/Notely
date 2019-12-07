@@ -1,20 +1,38 @@
 package com.example.notely
 
+import android.Manifest.permission.CAMERA
+import android.Manifest.permission.READ_EXTERNAL_STORAGE
+import android.app.Activity
+import android.content.Intent
+import android.widget.Button
+import android.widget.ImageView
+
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
+
+import android.provider.MediaStore
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.notely.ui.files.FilesFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.io.File
+import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private val STORAGE_PERMISSION_CODE: Int = 1
@@ -39,6 +57,8 @@ class MainActivity : AppCompatActivity() {
 
         checkPermissions()
     }
+
+
 
     private fun checkPermissions() {
         if (ContextCompat.checkSelfPermission(this,android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){

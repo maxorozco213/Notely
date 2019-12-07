@@ -25,8 +25,8 @@
         <activity android:name=".MainActivity" />
 
         <provider
-            android:authorities="com.example.notely"
-            android:name=".GenericFileProvider"
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.notely.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
