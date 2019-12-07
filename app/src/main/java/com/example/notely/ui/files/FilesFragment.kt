@@ -5,34 +5,96 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.notely.R
 import com.example.notely.databinding.FragmentFilesBinding
+import com.example.notely.utils.getFileModelsFromFiles
+import com.example.notely.utils.getFilesFromPath
+import kotlinx.android.synthetic.main.fragment_files.*
+import kotlinx.android.synthetic.main.item_recycler_file.*
+import kotlinx.android.synthetic.main.item_recycler_file.filesRecyclerView
 
 class FilesFragment : Fragment() {
-    private lateinit var filesViewModel: FilesViewModel
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        filesViewModel =
-            ViewModelProviders.of(this).get(FilesViewModel::class.java)
+    private lateinit var mFilesAdapter: FilesRecyclerAdapter
+    private lateinit var PATH: String
 
-        val binding = DataBindingUtil.inflate<FragmentFilesBinding>(
-            inflater, R.layout.fragment_files, container, false)
-        binding.files = this
+    companion object {
+        private const val ARG_PATH: String = "com.example.notely.fileslist.path"
+        fun build(block: Builder.() -> Unit) = Builder().apply(block).build()
+    }
 
-        val textView: TextView = binding.textFiles
+    class Builder {
+        var path: String = ""
 
-        filesViewModel.text.observe(this, Observer {
-            textView.text = it
-        })
+        fun build(): FilesFragment {
+            val fragment = FilesFragment()
+            val args = Bundle()
+            args.putString(ARG_PATH, path)
+            fragment.arguments = args;
+            return fragment
+        }
+    }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_files, container, false)
+    }
 
-        return binding.root
+//    override fun onCreateView(
+//        inflater: LayoutInflater,
+//        container: ViewGroup?,
+//        savedInstanceState: Bundle?
+//    ): View? {
+//
+//
+//        filesViewModel =
+//            ViewModelProviders.of(this).get(FilesViewModel::class.java)
+//
+//        val binding = DataBindingUtil.inflate<FragmentFilesBinding>(
+//            inflater, R.layout.fragment_files, container, false)
+//        binding.files = this
+//
+//        val textView: TextView = binding.textNothing
+//
+//        filesViewModel.text.observe(this, Observer {
+//            textView.text = it
+//        })
+//
+//        return binding.root
+//    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val filePath = arguments?.getString(ARG_PATH)
+        if (filePath == null) {
+            Toast.makeText(context, "Path should not be null!", Toast.LENGTH_SHORT).show()
+            return
+        }
+        PATH = filePath
+
+        initViews()
+    }
+
+    private fun initViews() {
+        filesRecyclerView.layoutManager = LinearLayoutManager(context)
+        mFilesAdapter = FilesRecyclerAdapter()
+        filesRecyclerView.adapter = mFilesAdapter
+        updateDate()
+    }
+
+    fun updateDate() {
+        val files = getFileModelsFromFiles(getFilesFromPath(PATH))
+
+        if (files.isEmpty()) {
+            emptyFolderLayout.visibility = View.VISIBLE
+        } else {
+            emptyFolderLayout.visibility = View.INVISIBLE
+        }
+
+        mFilesAdapter.updateData(files)
     }
 }

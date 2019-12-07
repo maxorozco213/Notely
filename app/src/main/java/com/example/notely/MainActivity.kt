@@ -13,6 +13,7 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
+
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
@@ -26,6 +27,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.notely.ui.files.FilesFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.io.File
 import java.io.IOException
