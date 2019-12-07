@@ -22,7 +22,6 @@ import com.example.notely.databinding.FragmentFilesBinding
 import com.example.notely.utils.getFileModelsFromFiles
 import com.example.notely.utils.getFilesFromPath
 import kotlinx.android.synthetic.main.fragment_files.*
-import kotlinx.android.synthetic.main.item_recycler_file.*
 import kotlinx.android.synthetic.main.item_recycler_file.filesRecyclerView
 import com.google.firebase.storage.FirebaseStorage
 
