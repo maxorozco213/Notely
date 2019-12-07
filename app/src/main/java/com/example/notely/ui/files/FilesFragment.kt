@@ -49,32 +49,42 @@ class FilesFragment : Fragment() {
             return fragment
         }
     }
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_files, container, false)
-    }
 
-//    override fun onCreateView(
-//        inflater: LayoutInflater,
-//        container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View? {
-//
-//
-//        filesViewModel =
-//            ViewModelProviders.of(this).get(FilesViewModel::class.java)
-//
-//        val binding = DataBindingUtil.inflate<FragmentFilesBinding>(
-//            inflater, R.layout.fragment_files, container, false)
-//        binding.files = this
-//
-//        val textView: TextView = binding.textNothing
-//
-//        filesViewModel.text.observe(this, Observer {
-//            textView.text = it
-//        })
-//
-//        return binding.root
-//    }
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+
+
+        filesViewModel =
+            ViewModelProviders.of(this).get(FilesViewModel::class.java)
+
+        val binding = DataBindingUtil.inflate<FragmentFilesBinding>(
+            inflater, R.layout.fragment_files, container, false)
+        binding.files = this
+
+        val textView: TextView = binding.textNothing
+
+        filesViewModel.text.observe(this, Observer {
+            textView.text = it
+        })
+
+        val testBtn2: Button = binding.button2
+        val testBtn1: Button = binding.button3
+
+        testBtn2.setOnClickListener @Suppress("UNUSED_ANONYMOUS_PARAMETER")
+        {view: View ->
+            selectImage()
+        }
+
+        testBtn1.setOnClickListener @Suppress("UNUSED_ANONYMOUS_PARAMETER")
+        { view: View ->
+            uploadImage(image)
+        }
+
+        return binding.root
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -95,20 +105,6 @@ class FilesFragment : Fragment() {
         updateDate()
     }
 
-
-        val textView: TextView = binding.textFiles
-        val testBtn2: Button = binding.button2
-        val testBtn1: Button = binding.button3
-
-        testBtn2.setOnClickListener @Suppress("UNUSED_ANONYMOUS_PARAMETER")
-        {view: View ->
-            selectImage()
-        }
-
-        testBtn1.setOnClickListener @Suppress("UNUSED_ANONYMOUS_PARAMETER")
-        { view: View ->
-            uploadImage(image)
-        }
 
     fun updateDate() {
         val files = getFileModelsFromFiles(getFilesFromPath(PATH))
