@@ -12,5 +12,6 @@ class CameraViewModel : ViewModel() {
         *
         * */
     }
+
     val text: LiveData<String> = _text
 }
