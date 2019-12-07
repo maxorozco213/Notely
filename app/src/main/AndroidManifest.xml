@@ -21,7 +21,6 @@
         </activity>
 
         <provider
-            android:authorities="com.thetechnocafe.gurleensethi.kotlinfileexplorer"
             android:name=".GenericFileProvider"
             android:exported="false"
             android:grantUriPermissions="true">
