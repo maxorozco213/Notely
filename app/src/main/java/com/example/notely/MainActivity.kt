@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
         val navController = findNavController(R.id.nav_host_fragment)
@@ -49,11 +50,11 @@ class MainActivity : AppCompatActivity() {
             AlertDialog.Builder(this)
                 .setTitle("Permission needed")
                 .setMessage("This is needed")
-                .setPositiveButton("Ok") { DialogInterface, which ->
+                .setPositiveButton("Ok") { _, _ ->
                     ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), STORAGE_PERMISSION_CODE)
                     Log.i("Permissions", "User pressed OK")
                 }
-                .setNegativeButton("Cancel") { DialogInterface, which ->
+                .setNegativeButton("Cancel") { _, _ ->
                     Log.i("Permissions", "Storage permission denied")
                 }
                 .show()
