@@ -16,9 +16,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.notely.R
 import com.example.notely.databinding.FragmentFilesBinding
+import com.example.notely.ui.user.UserViewModel
 import com.example.notely.utils.getFileModelsFromFiles
 import com.example.notely.utils.getFilesFromPath
 import kotlinx.android.synthetic.main.fragment_files.*
@@ -32,6 +34,7 @@ class FilesFragment : Fragment() {
     private var image: Uri? = null
     private lateinit var mFilesAdapter: FilesRecyclerAdapter
     private lateinit var PATH: String
+    private lateinit var userViewModel: UserViewModel
 
 //    companion object {
 //        private const val ARG_PATH: String = "com.example.notely.fileslist.path"
@@ -60,9 +63,14 @@ class FilesFragment : Fragment() {
         filesViewModel =
             ViewModelProviders.of(this).get(FilesViewModel::class.java)
 
+        userViewModel =
+            ViewModelProviders.of(this).get(UserViewModel::class.java)
+
         val binding = DataBindingUtil.inflate<FragmentFilesBinding>(
             inflater, R.layout.fragment_files, container, false)
         binding.files = this
+
+
 
 //        val textView: TextView = binding.text
 //
@@ -125,14 +133,25 @@ class FilesFragment : Fragment() {
     }
 
     private fun uploadImage(image: Uri?) {
+
+        if(userViewModel.user.value ==null){
+            findNavController().navigate(R.id.action_navigation_files_to_navigation_login)
+            return
+        }
+
+        val uId = userViewModel.user.value!!.uid
+
         val storageRef = FirebaseStorage.getInstance().reference
-        val upImage = storageRef.child("image/${image?.lastPathSegment}")
+        val upImage = storageRef.child("$uId/${image?.lastPathSegment}")
 
         if (image != null) {
             val uploadTask = upImage.putFile(image)
             uploadTask
-                .addOnSuccessListener { Log.i("FILE UPLOAD", "Success") }
+                .addOnSuccessListener {
+                    Toast.makeText(requireContext(), "Upload Successful", LENGTH_LONG).show()
+                    Log.i("FILE UPLOAD", "Success") }
                 .addOnFailureListener { Log.i("FILE UPLOAD", "Failure") }
+
         } else {
             Log.i("FILE UPLOAD", "more failure")
         }
