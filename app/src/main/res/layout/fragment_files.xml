@@ -36,18 +36,18 @@
             <TextView
                 android:id="@+id/text_nothing"
                 android:layout_width="wrap_content"
-                android:layout_marginTop="16dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/text_nothing"
                 android:textSize="16sp"
-                android:textStyle="bold"
-                android:text="There is nothing here!"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/empty_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:text="Empty Folder."/>
+                android:text="@string/empty_text"
+                android:textSize="12sp" />
 
         </LinearLayout>
 

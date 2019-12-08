@@ -44,7 +44,7 @@ class FilesFragment : Fragment() {
             val fragment = FilesFragment()
             val args = Bundle()
             args.putString(ARG_PATH, path)
-            fragment.arguments = args;
+            fragment.arguments = args
             return fragment
         }
     }
@@ -105,7 +105,7 @@ class FilesFragment : Fragment() {
     }
 
 
-    fun updateDate() {
+    private fun updateDate() {
         val files = getFileModelsFromFiles(getFilesFromPath(PATH))
 
         if (files.isEmpty()) {
@@ -121,28 +121,33 @@ class FilesFragment : Fragment() {
         val intent = Intent(Intent.ACTION_PICK,
             android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         startActivityForResult(intent, PICK_PHOTO_REQUEST)
+        // onActivityForResult is called by system
     }
 
+    // Takes image URI (Assigned to global var by onActivityResult
     private fun uploadImage(image: Uri?) {
+        // Reference to FireBase storage
         val storageRef = FirebaseStorage.getInstance().reference
         val upImage = storageRef.child("image/${image?.lastPathSegment}")
 
         if (image != null) {
             val uploadTask = upImage.putFile(image)
             uploadTask
-                .addOnSuccessListener { Log.i("FILE UPLOAD", "Success") }
+                .addOnSuccessListener {
+                    Log.i("FILE UPLOAD", "Success")
+                    Toast.makeText(requireContext(), "File uploaded", LENGTH_LONG).show()
+                }
                 .addOnFailureListener { Log.i("FILE UPLOAD", "Failure") }
         } else {
             Log.i("FILE UPLOAD", "more failure")
         }
     }
 
+    // Called by system after startActivityForResult
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         // Check which request we're responding to
         if (requestCode == PICK_PHOTO_REQUEST && resultCode == Activity.RESULT_OK) {
             image = data?.data
-            Toast.makeText(requireContext(), image.toString(), LENGTH_LONG).show()
         }
     }
-
 }

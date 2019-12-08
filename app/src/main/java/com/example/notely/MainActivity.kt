@@ -21,7 +21,6 @@ class MainActivity : AppCompatActivity() {
             READ_EXTERNAL_STORAGE
     )
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

@@ -61,5 +61,4 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage:19.1.0'
     implementation 'com.google.android.gms:play-services-auth:17.0.0'
     implementation "android.arch.lifecycle:extensions:1.1.1"
-    implementation 'com.android.support:recyclerview-v7:27.1.1'
 }

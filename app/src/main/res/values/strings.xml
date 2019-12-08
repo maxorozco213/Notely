@@ -10,4 +10,6 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="empty_text">Empty Folder</string>
+    <string name="text_nothing">There is nothing here!</string>
 </resources>
