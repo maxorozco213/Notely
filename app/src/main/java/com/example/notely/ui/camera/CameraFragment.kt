@@ -1,4 +1,8 @@
+// https://github.com/kotlincodes/Camera-Intent-with-Kotlin
+// camera code from above was revised to work in fragments
+
 package com.example.notely.ui.camera
+
 
 import android.Manifest
 import android.app.Activity
