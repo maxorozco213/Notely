@@ -24,6 +24,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.notely.R
 import com.example.notely.databinding.FragmentCameraBinding
+import com.theartofdev.edmodo.cropper.CropImage
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -38,6 +39,8 @@ class CameraFragment : Fragment() {
     private val PERMISSION_REQUEST_CODE: Int = 101
 
     private var mCurrentPhotoPath: String? = null;
+
+    private var imageUri: Uri? = null;
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -117,26 +120,29 @@ class CameraFragment : Fragment() {
         val intent: Intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         val file: File = createFile()
 
-        val uri: Uri = FileProvider.getUriForFile(
+        imageUri = FileProvider.getUriForFile(
             requireContext(),
             "com.example.notely.fileprovider",
             file
         )
-        intent.putExtra(MediaStore.EXTRA_OUTPUT,uri)
+        intent.putExtra(MediaStore.EXTRA_OUTPUT,imageUri)
         startActivityForResult(intent, REQUEST_IMAGE_CAPTURE)
 
     }
 
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
-//
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
+
 //            //To get the File for further usage
 //            val auxFile = File(mCurrentPhotoPath)
 //
 //
 //            var bitmap : Bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath)
 //            imageView.setImageBitmap(bitmap)
-//
-//        }
-//    }
+
+            CropImage.activity(imageUri)
+                .start(requireContext(), this);
+
+        }
+    }
 }
