@@ -36,29 +36,11 @@ class FilesFragment : Fragment() {
     private lateinit var PATH: String
     private lateinit var userViewModel: UserViewModel
 
-//    companion object {
-//        private const val ARG_PATH: String = "com.example.notely.fileslist.path"
-//        fun build(block: Builder.() -> Unit) = Builder().apply(block).build()
-//    }
-//
-//    class Builder {
-//        var path: String = ""
-//
-//        fun build(): FilesFragment {
-//            val fragment = FilesFragment()
-//            val args = Bundle()
-//            args.putString(ARG_PATH, path)
-//            fragment.arguments = args;
-//            return fragment
-//        }
-//    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
 
         filesViewModel =
             ViewModelProviders.of(this).get(FilesViewModel::class.java)
@@ -70,30 +52,18 @@ class FilesFragment : Fragment() {
             inflater, R.layout.fragment_files, container, false)
         binding.files = this
 
-
-
-//        val textView: TextView = binding.text
-//
-//        filesViewModel.text.observe(this, Observer {
-//            textView.text = it
-//        })
-
         val testBtn2: Button = binding.button2
         val testBtn1: Button = binding.button3
 
-        testBtn2.setOnClickListener @Suppress("UNUSED_ANONYMOUS_PARAMETER")
-        {view: View ->
+        testBtn2.setOnClickListener {
             filesViewModel.selectImage(this)
         }
 
-        testBtn1.setOnClickListener @Suppress("UNUSED_ANONYMOUS_PARAMETER")
-        { view: View ->
+        testBtn1.setOnClickListener {
             upload()
         }
 
         return binding.root
-
-
     }
 
     private fun upload(){
@@ -105,8 +75,23 @@ class FilesFragment : Fragment() {
 
         filesViewModel.uploadImage(uid,image,requireContext())
 
-
     }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        // Check which request we're responding to
+        if (requestCode == PICK_PHOTO_REQUEST && resultCode == Activity.RESULT_OK) {
+            image = data?.data
+            Toast.makeText(requireContext(), image.toString(), Toast.LENGTH_LONG).show()
+        }
+    }
+
+}
+
+
+//            val textView: TextView = binding.text
+//
+//        filesViewModel.text.observe(this, Observer {
+//            textView.text = it
+//        })
 
 //    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 //        super.onViewCreated(view, savedInstanceState)
@@ -140,13 +125,21 @@ class FilesFragment : Fragment() {
 //
 //        mFilesAdapter.updateData(files)
 //    }
+//
+//    companion object {
+//        private const val ARG_PATH: String = "com.example.notely.fileslist.path"
+//        fun build(block: Builder.() -> Unit) = Builder().apply(block).build()
+//    }
+//
+//    class Builder {
+//        var path: String = ""
+//
+//        fun build(): FilesFragment {
+//            val fragment = FilesFragment()
+//            val args = Bundle()
+//            args.putString(ARG_PATH, path)
+//            fragment.arguments = args;
+//            return fragment
+//        }
+//    }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        // Check which request we're responding to
-        if (requestCode == PICK_PHOTO_REQUEST && resultCode == Activity.RESULT_OK) {
-            image = data?.data
-            Toast.makeText(requireContext(), image.toString(), Toast.LENGTH_LONG).show()
-        }
-    }
-
-}

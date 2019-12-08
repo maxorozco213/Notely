@@ -26,8 +26,10 @@ class FilesViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is files Fragment"
-
     }
+
+    val text: LiveData<String>
+        get() = _text
 
     fun selectImage(frag: Fragment) {
 
@@ -58,5 +60,4 @@ class FilesViewModel : ViewModel() {
 
 
 
-    val text: LiveData<String> = _text
 }
