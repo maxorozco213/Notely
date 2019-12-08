@@ -83,16 +83,31 @@ class FilesFragment : Fragment() {
 
         testBtn2.setOnClickListener @Suppress("UNUSED_ANONYMOUS_PARAMETER")
         {view: View ->
-            selectImage()
+            filesViewModel.selectImage(this)
         }
 
         testBtn1.setOnClickListener @Suppress("UNUSED_ANONYMOUS_PARAMETER")
         { view: View ->
-            uploadImage(image)
+            upload()
         }
 
         return binding.root
+
+
     }
+
+    private fun upload(){
+        val uid = userViewModel.user.value?.uid
+        if(uid == null){
+            findNavController().navigate(R.id.action_navigation_files_to_navigation_login)
+            return
+        }
+
+        filesViewModel.uploadImage(uid,image,requireContext())
+
+
+    }
+
 //    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 //        super.onViewCreated(view, savedInstanceState)
 //
@@ -126,42 +141,11 @@ class FilesFragment : Fragment() {
 //        mFilesAdapter.updateData(files)
 //    }
 
-    private fun selectImage() {
-        val intent = Intent(Intent.ACTION_PICK,
-            android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        startActivityForResult(intent, PICK_PHOTO_REQUEST)
-    }
-
-    private fun uploadImage(image: Uri?) {
-
-        if(userViewModel.user.value ==null){
-            findNavController().navigate(R.id.action_navigation_files_to_navigation_login)
-            return
-        }
-
-        val uId = userViewModel.user.value!!.uid
-
-        val storageRef = FirebaseStorage.getInstance().reference
-        val upImage = storageRef.child("$uId/${image?.lastPathSegment}")
-
-        if (image != null) {
-            val uploadTask = upImage.putFile(image)
-            uploadTask
-                .addOnSuccessListener {
-                    Toast.makeText(requireContext(), "Upload Successful", LENGTH_LONG).show()
-                    Log.i("FILE UPLOAD", "Success") }
-                .addOnFailureListener { Log.i("FILE UPLOAD", "Failure") }
-
-        } else {
-            Log.i("FILE UPLOAD", "more failure")
-        }
-    }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         // Check which request we're responding to
         if (requestCode == PICK_PHOTO_REQUEST && resultCode == Activity.RESULT_OK) {
             image = data?.data
-            Toast.makeText(requireContext(), image.toString(), LENGTH_LONG).show()
+            Toast.makeText(requireContext(), image.toString(), Toast.LENGTH_LONG).show()
         }
     }
 
