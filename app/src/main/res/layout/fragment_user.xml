@@ -31,21 +31,81 @@
             android:id="@+id/signOut"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sign Out"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="@dimen/margin_med"
+            android:layout_marginEnd="@dimen/margin_med"
+            android:text="@string/sign_out"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/name" />
+            app:layout_constraintTop_toBottomOf="@+id/text_user" />
 
         <TextView
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="@dimen/margin_med"
+            android:textSize="@dimen/text_med"
+            app:layout_constraintBottom_toBottomOf="@+id/signOut"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_user" />
+            app:layout_constraintTop_toTopOf="@+id/signOut" />
+
+        <TextView
+            android:id="@+id/text_view_linked_acct_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_med"
+            android:layout_marginTop="@dimen/margin_lg"
+            android:text="@string/linked_acct_msg"
+            android:textSize="@dimen/text_normal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/name" />
+
+        <TextView
+            android:id="@+id/text_view_linked_acct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_med"
+            android:layout_marginTop="@dimen/margin_med"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_linked_acct_msg" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_med"
+            android:layout_marginTop="@dimen/margin_lg"
+            android:text="TextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_linked_acct" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_med"
+            android:layout_marginTop="@dimen/margin_med"
+            android:text="TextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_med"
+            android:layout_marginTop="@dimen/margin_lg"
+            android:text="TextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_med"
+            android:layout_marginTop="@dimen/margin_med"
+            android:text="TextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
