@@ -34,10 +34,11 @@ class UserFragment : Fragment() {
         userViewModel.text.observe(this, Observer {
             textView.text = it
         })
-        if ( userViewModel.user.value == null ) {
-            println("\n\n===== it == null ========\n\n")
-            findNavController().navigate(R.id.action_navigation_user_to_navigation_login)
-        }
+        userViewModel.user.observe(this, Observer {
+            if ( it == null ) {
+                findNavController().navigate(R.id.action_navigation_user_to_navigation_login)
+            }
+        })
         userViewModel.user.observe(this, Observer {
             binding.name.text = it?.displayName ?: "Not signed in"
         })
