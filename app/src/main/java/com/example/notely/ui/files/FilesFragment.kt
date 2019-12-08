@@ -33,22 +33,22 @@ class FilesFragment : Fragment() {
     private lateinit var mFilesAdapter: FilesRecyclerAdapter
     private lateinit var PATH: String
 
-    companion object {
-        private const val ARG_PATH: String = "com.example.notely.fileslist.path"
-        fun build(block: Builder.() -> Unit) = Builder().apply(block).build()
-    }
-
-    class Builder {
-        var path: String = ""
-
-        fun build(): FilesFragment {
-            val fragment = FilesFragment()
-            val args = Bundle()
-            args.putString(ARG_PATH, path)
-            fragment.arguments = args;
-            return fragment
-        }
-    }
+//    companion object {
+//        private const val ARG_PATH: String = "com.example.notely.fileslist.path"
+//        fun build(block: Builder.() -> Unit) = Builder().apply(block).build()
+//    }
+//
+//    class Builder {
+//        var path: String = ""
+//
+//        fun build(): FilesFragment {
+//            val fragment = FilesFragment()
+//            val args = Bundle()
+//            args.putString(ARG_PATH, path)
+//            fragment.arguments = args;
+//            return fragment
+//        }
+//    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -64,11 +64,11 @@ class FilesFragment : Fragment() {
             inflater, R.layout.fragment_files, container, false)
         binding.files = this
 
-        val textView: TextView = binding.textNothing
-
-        filesViewModel.text.observe(this, Observer {
-            textView.text = it
-        })
+//        val textView: TextView = binding.text
+//
+//        filesViewModel.text.observe(this, Observer {
+//            textView.text = it
+//        })
 
         val testBtn2: Button = binding.button2
         val testBtn1: Button = binding.button3
@@ -85,38 +85,38 @@ class FilesFragment : Fragment() {
 
         return binding.root
     }
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//
+//        val filePath = arguments?.getString(ARG_PATH)
+//        if (filePath == null) {
+//            Toast.makeText(context, "Path should not be null!", Toast.LENGTH_SHORT).show()
+//            return
+//        }
+//        PATH = filePath
+//
+//        initViews()
+//    }
 
-        val filePath = arguments?.getString(ARG_PATH)
-        if (filePath == null) {
-            Toast.makeText(context, "Path should not be null!", Toast.LENGTH_SHORT).show()
-            return
-        }
-        PATH = filePath
-
-        initViews()
-    }
-
-    private fun initViews() {
-        filesRecyclerView.layoutManager = LinearLayoutManager(context)
-        mFilesAdapter = FilesRecyclerAdapter()
-        filesRecyclerView.adapter = mFilesAdapter
-        updateDate()
-    }
+//    private fun initViews() {
+//        filesRecyclerView.layoutManager = LinearLayoutManager(context)
+//        mFilesAdapter = FilesRecyclerAdapter()
+//        filesRecyclerView.adapter = mFilesAdapter
+//        updateDate()
+//    }
 
 
-    fun updateDate() {
-        val files = getFileModelsFromFiles(getFilesFromPath(PATH))
-
-        if (files.isEmpty()) {
-            emptyFolderLayout.visibility = View.VISIBLE
-        } else {
-            emptyFolderLayout.visibility = View.INVISIBLE
-        }
-
-        mFilesAdapter.updateData(files)
-    }
+//    fun updateDate() {
+//        val files = getFileModelsFromFiles(getFilesFromPath(PATH))
+//
+//        if (files.isEmpty()) {
+//            emptyFolderLayout.visibility = View.VISIBLE
+//        } else {
+//            emptyFolderLayout.visibility = View.INVISIBLE
+//        }
+//
+//        mFilesAdapter.updateData(files)
+//    }
 
     private fun selectImage() {
         val intent = Intent(Intent.ACTION_PICK,
