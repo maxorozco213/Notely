@@ -41,7 +41,7 @@ class UserFragment : Fragment() {
         userViewModel.user.observe(this, Observer {
             binding.name.text = it?.displayName ?: "Not signed in"
         })
-        binding.signOut.setOnClickListener { userViewModel.signOut() }
+        binding.btnSignOut.setOnClickListener { userViewModel.signOut() }
         return binding.root
     }
 

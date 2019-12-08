@@ -28,7 +28,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/signOut"
+            android:id="@+id/btn_sign_out"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_med"
@@ -43,9 +43,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_med"
             android:textSize="@dimen/text_med"
-            app:layout_constraintBottom_toBottomOf="@+id/signOut"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_sign_out"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/signOut" />
+            app:layout_constraintTop_toTopOf="@+id/btn_sign_out" />
 
         <TextView
             android:id="@+id/text_view_linked_acct_msg"
