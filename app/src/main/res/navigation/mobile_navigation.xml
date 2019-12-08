@@ -3,13 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_user">
+    app:startDestination="@id/navigation_files">
 
     <fragment
         android:id="@+id/navigation_user"
         android:name="com.example.notely.ui.user.UserFragment"
         android:label="@string/user_nav"
-        tools:layout="@layout/fragment_user" />
+        tools:layout="@layout/fragment_user" >
+        <action
+            android:id="@+id/action_navigation_user_to_navigation_login"
+            app:destination="@id/navigation_login" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_camera"
@@ -22,4 +26,13 @@
         android:name="com.example.notely.ui.files.FilesFragment"
         android:label="@string/file_nav"
         tools:layout="@layout/fragment_files" />
+    <fragment
+        android:id="@+id/navigation_login"
+        android:name="com.example.notely.LoginRegister"
+        android:label="fragment_login_register"
+        tools:layout="@layout/fragment_login_register" >
+        <action
+            android:id="@+id/action_navigation_login_to_navigation_user"
+            app:destination="@id/navigation_user" />
+    </fragment>
 </navigation>
