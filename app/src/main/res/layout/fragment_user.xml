@@ -73,9 +73,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_med"
             android:layout_marginTop="@dimen/margin_lg"
-            android:text="Images store with Notely:"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_view_linked_acct" />
+            app:layout_constraintTop_toBottomOf="@+id/text_view_linked_acct"
+            tools:text="@string/files_stored_msg" />
 
         <TextView
             android:id="@+id/textView4"
@@ -92,7 +92,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_med"
             android:layout_marginTop="@dimen/margin_lg"
-            android:text="Total data stored with Notely:"
+            android:text="@string/files_stored_msg"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
 

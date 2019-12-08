@@ -14,4 +14,6 @@
     <string name="sign_in_google">Sign in with Google to register for Notely</string>
     <string name="sign_out">Sign Out</string>
     <string name="linked_acct_msg">Your Notely account is linked with:</string>
+    <string name="files_stored_msg">Images store with Notely:</string>
+    <string name="total_size_msg">Total data stored with Notely:</string>
 </resources>
