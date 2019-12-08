@@ -3,6 +3,7 @@ package com.example.notely.ui.user
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
 class UserViewModel : ViewModel() {
@@ -12,5 +13,9 @@ class UserViewModel : ViewModel() {
     }
     val user = MutableLiveData<FirebaseUser?>()
     val text: LiveData<String> = _text
+
+    init {
+        user.value = FirebaseAuth.getInstance().currentUser
+    }
 
 }

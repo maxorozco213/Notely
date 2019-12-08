@@ -62,11 +62,6 @@ class UserFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
     }
 
-    override fun onStart() {
-        super.onStart()
-        userViewModel.user.value = auth.currentUser
-    }
-
     private fun signIn() {
         val signInIntent = googleSignInClient.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)
