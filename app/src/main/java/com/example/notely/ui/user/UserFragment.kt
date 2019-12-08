@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.example.notely.R
 import com.example.notely.databinding.FragmentUserBinding
-import com.google.firebase.auth.FirebaseAuth
 
 class UserFragment : Fragment() {
 
@@ -42,12 +41,8 @@ class UserFragment : Fragment() {
         userViewModel.user.observe(this, Observer {
             binding.name.text = it?.displayName ?: "Not signed in"
         })
-        binding.signOut.setOnClickListener { signOut() }
+        binding.signOut.setOnClickListener { userViewModel.signOut() }
         return binding.root
     }
 
-    private fun signOut() {
-        FirebaseAuth.getInstance().signOut()
-        userViewModel.user.value = null
-    }
 }
