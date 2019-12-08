@@ -63,4 +63,7 @@ dependencies {
     implementation "android.arch.lifecycle:extensions:1.1.1"
     implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
     implementation 'com.android.support:recyclerview-v7:27.1.1'
+
+    //Android-Image-Cropper
+    api 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
 }

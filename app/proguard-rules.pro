@@ -20,3 +20,6 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 -keep class androidx.core.app.CoreComponentFactory { *; }
+
+# Necessary for Android-Image-Cropper
+-keep class androidx.appcompat.widget.** { *; }
