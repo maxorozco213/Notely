@@ -1,6 +1,5 @@
 package com.example.notely.ui.files
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -11,11 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.navigation.fragment.NavHostFragment.findNavController
-import androidx.navigation.fragment.findNavController
-import com.example.notely.R
 import com.google.firebase.storage.FirebaseStorage
-import java.util.ArrayList
 
 class FilesViewModel : ViewModel() {
 
@@ -50,14 +45,22 @@ class FilesViewModel : ViewModel() {
             uploadTask
                 .addOnSuccessListener {
                     Toast.makeText(context, "Upload Successful", Toast.LENGTH_LONG).show()
-                    Log.i("FILE UPLOAD", "Success") }
+                    Log.i("FILE UPLOAD", "Success")
+                    println("Download url:")
+                    upImage.downloadUrl.addOnCompleteListener{
+                        println(it.result.toString())
+                    }
+                }
                 .addOnFailureListener { Log.i("FILE UPLOAD", "Failure") }
-
         } else {
             Log.i("FILE UPLOAD", "more failure")
         }
     }
 
+    fun numberOfFiles(uid: String) {
+        val storageRef = FirebaseStorage.getInstance().reference
+        val folder = storageRef.child(uid)
 
+    }
 
 }
