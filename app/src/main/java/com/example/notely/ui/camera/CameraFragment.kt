@@ -2,6 +2,8 @@ package com.example.notely.ui.camera
 
 import android.Manifest
 import android.app.Activity
+import android.app.Activity.RESULT_OK
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -13,6 +15,7 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
@@ -25,6 +28,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.notely.R
 import com.example.notely.databinding.FragmentCameraBinding
 import com.theartofdev.edmodo.cropper.CropImage
+import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -35,12 +39,15 @@ class CameraFragment : Fragment() {
 
     val REQUEST_IMAGE_CAPTURE = 1
 
+    private lateinit var binding: FragmentCameraBinding
 
     private val PERMISSION_REQUEST_CODE: Int = 101
 
     private var mCurrentPhotoPath: String? = null;
 
     private var imageUri: Uri? = null;
+
+//    private val crop_btn = binding.crop
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,7 +57,7 @@ class CameraFragment : Fragment() {
         cameraViewModel =
             ViewModelProviders.of(this).get(CameraViewModel::class.java)
 
-        val binding = DataBindingUtil.inflate<FragmentCameraBinding>(
+        binding = DataBindingUtil.inflate<FragmentCameraBinding>(
             inflater, R.layout.fragment_camera, container, false)
         binding.camera
 
@@ -133,16 +140,27 @@ class CameraFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
 
-//            //To get the File for further usage
-//            val auxFile = File(mCurrentPhotoPath)
-//
-//
-//            var bitmap : Bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath)
-//            imageView.setImageBitmap(bitmap)
 
-            CropImage.activity(imageUri)
-                .start(requireContext(), this);
+//            CropImage.activity(imageUri)
+//                .start(requireContext(), this);
+
+            binding.cropImageView.setImageUriAsync(imageUri);
+
+            binding.crop.setOnClickListener{
+                val cropped:Bitmap = binding.cropImageView.getCroppedImage();
+                val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+
+                println(getImageUriFromBitmap(requireContext(), cropped, timeStamp))
+            }
 
         }
     }
+
+    fun getImageUriFromBitmap(context: Context, bitmap: Bitmap, title: String): Uri{
+        val bytes = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+        val path = MediaStore.Images.Media.insertImage(context.contentResolver, bitmap, title, null)
+        return Uri.parse(path.toString())
+    }
+
 }
