@@ -44,11 +44,10 @@ class CameraFragment : Fragment() {
 
     private val PERMISSION_REQUEST_CODE: Int = 101
 
-    private var mCurrentPhotoPath: String? = null;
+    private var mCurrentPhotoPath: String? = null
 
-    private var imageUri: Uri? = null;
+    private var imageUri: Uri? = null
 
-//    private val crop_btn = binding.crop
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -156,7 +155,9 @@ class CameraFragment : Fragment() {
             binding.cropImageView.setOnCropImageCompleteListener{
                     view: CropImageView, result: CropImageView.CropResult ->
 
-                val cropped:Bitmap = binding.cropImageView.croppedImage
+                var cropped:Bitmap = binding.cropImageView.croppedImage
+
+                binding.croppedimage.setImageBitmap(cropped)
 
                 println(cropped == null)
 
@@ -165,11 +166,17 @@ class CameraFragment : Fragment() {
             }
 
 
-            binding .crop.setOnClickListener{
+            binding.crop.setOnClickListener{
                 println("button clicked")
 
                 binding.cropImageView.getCroppedImageAsync()
                 println("yo dawggggg")
+
+                binding.crop.visibility = View.GONE
+                binding.cropImageView.visibility = View.GONE
+                binding.croppedimage.visibility = View.VISIBLE
+
+
             }
 
         }

@@ -25,7 +25,7 @@
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.302">
+            app:layout_constraintVertical_bias="0.053">
 
         </com.theartofdev.edmodo.cropper.CropImageView>
 
@@ -34,12 +34,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="CROP"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cropImageView"
-            app:layout_constraintVertical_bias="0.213" />
+            app:layout_constraintVertical_bias="0.248" />
+
+        <ImageView
+            android:id="@+id/croppedimage"
+            android:layout_width="306dp"
+            android:layout_height="430dp"
+            android:visibility="invisible"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.053"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
