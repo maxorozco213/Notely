@@ -12,6 +12,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import kotlinx.coroutines.*
 
 class UserViewModel : ViewModel() {
 
@@ -24,6 +25,10 @@ class UserViewModel : ViewModel() {
         get() = _text
     val user: LiveData<FirebaseUser?>
         get() = _user
+
+    private var job = Job()
+    private val scope = CoroutineScope(Dispatchers.IO + job)
+
 
     init {
         _user.value = auth.currentUser
@@ -41,14 +46,30 @@ class UserViewModel : ViewModel() {
     val RC_SIGN_IN = 9001
 
     fun signIn(frag: Fragment) {
-        val signInIntent = googleSignInClient.signInIntent
-        // Fragment should override onActivityResult() to call userViewModel.firebaseAuthWithGoogle()
-        frag.startActivityForResult(signInIntent, RC_SIGN_IN)
+        scope.launch {
+            startActivity(frag)
+        }
+    }
+
+    private suspend fun startActivity(frag: Fragment) {
+        withContext(Dispatchers.IO) {
+            val signInIntent = googleSignInClient.signInIntent
+            // Fragment should override onActivityResult() to call userViewModel.firebaseAuthWithGoogle()
+            frag.startActivityForResult(signInIntent, RC_SIGN_IN)
+        }
     }
 
     fun signOut() {
-        auth.signOut()
+        scope.launch {
+            deAuth()
+        }
         _user.value = null
+    }
+
+    private suspend fun deAuth() {
+        withContext(Dispatchers.IO) {
+            auth.signOut()
+        }
     }
 
     fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
