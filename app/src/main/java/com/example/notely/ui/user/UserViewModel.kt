@@ -41,7 +41,7 @@ class UserViewModel : ViewModel() {
         googleSignInClient = GoogleSignIn.getClient(context, gso)
     }
 
-    lateinit var googleSignInClient: GoogleSignInClient
+    private lateinit var googleSignInClient: GoogleSignInClient
     val RC_SIGN_IN = 9001
 
     fun signIn(frag: Fragment) {

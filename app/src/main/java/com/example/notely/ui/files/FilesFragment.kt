@@ -32,8 +32,6 @@ class FilesFragment : Fragment() {
     private lateinit var filesViewModel: FilesViewModel
     private val PICK_PHOTO_REQUEST = 4
     private var image: Uri? = null
-    private lateinit var mFilesAdapter: FilesRecyclerAdapter
-    private lateinit var PATH: String
     private lateinit var userViewModel: UserViewModel
 
     override fun onCreateView(
@@ -80,66 +78,9 @@ class FilesFragment : Fragment() {
         // Check which request we're responding to
         if (requestCode == PICK_PHOTO_REQUEST && resultCode == Activity.RESULT_OK) {
             image = data?.data
-            Toast.makeText(requireContext(), image.toString(), Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(), "Photo selected", LENGTH_LONG).show()
         }
     }
 
 }
-
-
-//            val textView: TextView = binding.text
-//
-//        filesViewModel.text.observe(this, Observer {
-//            textView.text = it
-//        })
-
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//
-//        val filePath = arguments?.getString(ARG_PATH)
-//        if (filePath == null) {
-//            Toast.makeText(context, "Path should not be null!", Toast.LENGTH_SHORT).show()
-//            return
-//        }
-//        PATH = filePath
-//
-//        initViews()
-//    }
-
-//    private fun initViews() {
-//        filesRecyclerView.layoutManager = LinearLayoutManager(context)
-//        mFilesAdapter = FilesRecyclerAdapter()
-//        filesRecyclerView.adapter = mFilesAdapter
-//        updateDate()
-//    }
-
-
-//    fun updateDate() {
-//        val files = getFileModelsFromFiles(getFilesFromPath(PATH))
-//
-//        if (files.isEmpty()) {
-//            emptyFolderLayout.visibility = View.VISIBLE
-//        } else {
-//            emptyFolderLayout.visibility = View.INVISIBLE
-//        }
-//
-//        mFilesAdapter.updateData(files)
-//    }
-//
-//    companion object {
-//        private const val ARG_PATH: String = "com.example.notely.fileslist.path"
-//        fun build(block: Builder.() -> Unit) = Builder().apply(block).build()
-//    }
-//
-//    class Builder {
-//        var path: String = ""
-//
-//        fun build(): FilesFragment {
-//            val fragment = FilesFragment()
-//            val args = Bundle()
-//            args.putString(ARG_PATH, path)
-//            fragment.arguments = args;
-//            return fragment
-//        }
-//    }
 
