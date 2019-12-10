@@ -57,32 +57,27 @@ class CameraFragment : Fragment() {
         cameraViewModel =
             ViewModelProviders.of(this).get(CameraViewModel::class.java)
 
-        binding = DataBindingUtil.inflate<FragmentCameraBinding>(
+        binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_camera, container, false)
         binding.camera
 
-        if (checkPersmission()) takePicture() else requestPermission()
-
-//        val textView: TextView = binding.textCamera
-//
-//        cameraViewModel.text.observe(this, Observer {
-//            textView.text = it
-//        })
+        if (checkPersmission()) takePicture()
+        else requestPermission()
 
         return binding.root
     }
 
     private fun checkPersmission(): Boolean {
-        val camerperm = ContextCompat.checkSelfPermission(requireContext(),
-            android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
+        val cameraperm = ContextCompat.checkSelfPermission(requireContext(),
+            Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
 
         val readperm = ContextCompat.checkSelfPermission(requireContext(),
-            android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+            Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
 
         val writeperm = ContextCompat.checkSelfPermission(requireContext(),
-            android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+            Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
 
-        return (camerperm && readperm && writeperm)
+        return (cameraperm && readperm && writeperm)
     }
 
     private fun requestPermission() {
@@ -102,15 +97,10 @@ class CameraFragment : Fragment() {
                     &&grantResults[1] == PackageManager.PERMISSION_GRANTED) {
 
                     takePicture()
+                }else {
+                    Toast.makeText(requireContext(),"Permission Denied", Toast.LENGTH_SHORT).show()
                 }
-//                } else {
-//                    Toast.makeText(this,"Permission Denied", Toast.LENGTH_SHORT).show()
-//                }
                 return
-            }
-
-            else -> {
-
             }
         }
     }
@@ -148,9 +138,7 @@ class CameraFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
 
-
             binding.cropImageView.setImageUriAsync(imageUri);
-
 
             binding.cropImageView.setOnCropImageCompleteListener{
                     view: CropImageView, result: CropImageView.CropResult ->
@@ -158,36 +146,16 @@ class CameraFragment : Fragment() {
                 var cropped:Bitmap = binding.cropImageView.croppedImage
 
                 binding.croppedimage.setImageBitmap(cropped)
-
-                println(cropped == null)
-
-                val newUrl = getImageUriFromBitmap(requireContext(),cropped, System.currentTimeMillis().toString())
-                println(newUrl)
             }
 
-
             binding.crop.setOnClickListener{
-                println("button clicked")
-
                 binding.cropImageView.getCroppedImageAsync()
-                println("yo dawggggg")
-
                 binding.crop.visibility = View.GONE
                 binding.cropImageView.visibility = View.GONE
                 binding.croppedimage.visibility = View.VISIBLE
-
-
             }
 
         }
-    }
-
-    fun getImageUriFromBitmap(context: Context, bitmap: Bitmap, title: String): Uri{
-        val bytes = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
-        val path = MediaStore.Images.Media.insertImage(requireContext().contentResolver, bitmap, title, null)
-
-        return Uri.parse(path.toString())
     }
 
 }
