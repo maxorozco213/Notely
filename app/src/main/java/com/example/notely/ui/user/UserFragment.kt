@@ -11,10 +11,12 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.example.notely.R
 import com.example.notely.databinding.FragmentUserBinding
+import com.example.notely.ui.files.FilesViewModel
 
 class UserFragment : Fragment() {
 
     private lateinit var userViewModel: UserViewModel
+    private lateinit var filesViewModel: FilesViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,7 +25,8 @@ class UserFragment : Fragment() {
     ): View? {
         userViewModel =
             ViewModelProviders.of(this).get(UserViewModel::class.java)
-
+        filesViewModel =
+            ViewModelProviders.of(this).get(FilesViewModel::class.java)
         val binding = DataBindingUtil.inflate<FragmentUserBinding>(
             inflater, R.layout.fragment_user, container, false)
         binding.user = this

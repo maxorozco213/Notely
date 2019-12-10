@@ -60,7 +60,15 @@ class FilesViewModel : ViewModel() {
     fun numberOfFiles(uid: String) {
         val storageRef = FirebaseStorage.getInstance().reference
         val folder = storageRef.child(uid)
-
+        folder.listAll().addOnSuccessListener {
+            println("Items: ")
+            println(it.items.size)
+            println("[ ")
+            for ( x in it.items ) {
+                println(x.name)
+            }
+            println("]")
+        }
     }
 
 }

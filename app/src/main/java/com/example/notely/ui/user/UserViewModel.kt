@@ -20,15 +20,14 @@ class UserViewModel : ViewModel() {
     private val _text = MutableLiveData<String>().apply {
         value = "This is user Fragment"
     }
-    private val _user = MutableLiveData<FirebaseUser?>()
     val text: LiveData<String>
         get() = _text
+    private val _user = MutableLiveData<FirebaseUser?>()
     val user: LiveData<FirebaseUser?>
         get() = _user
 
     private var job = Job()
     private val scope = CoroutineScope(Dispatchers.IO + job)
-
 
     init {
         _user.value = auth.currentUser
