@@ -11,21 +11,21 @@
     </data>
 
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <com.theartofdev.edmodo.cropper.CropImageView
             android:id="@+id/cropImageView"
-            android:layout_width="395dp"
-            android:layout_height="612dp"
-            android:layout_weight="1"
+            android:layout_width="306dp"
+            android:layout_height="430dp"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.773">
+            app:layout_constraintVertical_bias="0.302">
 
         </com.theartofdev.edmodo.cropper.CropImageView>
 
@@ -34,23 +34,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="CROP"
-            app:layout_constraintBottom_toTopOf="@+id/cropImageView"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <!--        <TextView-->
-<!--            android:id="@+id/text_camera"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="8dp"-->
-<!--            android:layout_marginTop="8dp"-->
-<!--            android:layout_marginEnd="8dp"-->
-<!--            android:textAlignment="center"-->
-<!--            android:textSize="20sp"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent" />-->
+            app:layout_constraintTop_toBottomOf="@+id/cropImageView"
+            app:layout_constraintVertical_bias="0.213" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

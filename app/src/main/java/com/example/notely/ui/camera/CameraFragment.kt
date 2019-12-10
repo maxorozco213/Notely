@@ -28,6 +28,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.notely.R
 import com.example.notely.databinding.FragmentCameraBinding
 import com.theartofdev.edmodo.cropper.CropImage
+import com.theartofdev.edmodo.cropper.CropImageView
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.IOException
@@ -146,11 +147,35 @@ class CameraFragment : Fragment() {
 
             binding.cropImageView.setImageUriAsync(imageUri);
 
-            binding.crop.setOnClickListener{
-                val cropped:Bitmap = binding.cropImageView.getCroppedImage();
-                val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+//            binding.cropImageView.setOnCropImageCompleteListener{
+//                view: CropImageView, result: CropImageView.CropResult ->
+//
+//                val cropped:Bitmap = binding.cropImageView.getCroppedImage();
+//                // val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+//
+//                println(getImageUriFromBitmap(requireContext(), cropped, System.currentTimeMillis().toString()))
+//            }
 
-                println(getImageUriFromBitmap(requireContext(), cropped, timeStamp))
+            binding.cropImageView.setOnCropImageCompleteListener{
+                    view: CropImageView, result: CropImageView.CropResult ->
+
+                val cropped:Bitmap = binding.cropImageView.croppedImage
+
+                println(cropped == null)
+
+                val newUrl = getImageUriFromBitmap(requireContext(),cropped, System.currentTimeMillis().toString())
+                println(newUrl)
+                // val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+
+//                    println(getImageUriFromBitmap(requireContext(), cropped, System.currentTimeMillis().toString()))
+            }
+
+
+            binding .crop.setOnClickListener{
+                println("button clicked")
+
+                binding.cropImageView.getCroppedImageAsync()
+                println("yo dawggggg")
             }
 
         }
@@ -159,7 +184,8 @@ class CameraFragment : Fragment() {
     fun getImageUriFromBitmap(context: Context, bitmap: Bitmap, title: String): Uri{
         val bytes = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
-        val path = MediaStore.Images.Media.insertImage(context.contentResolver, bitmap, title, null)
+        val path = MediaStore.Images.Media.insertImage(requireContext().contentResolver, bitmap, title, null)
+
         return Uri.parse(path.toString())
     }
 
