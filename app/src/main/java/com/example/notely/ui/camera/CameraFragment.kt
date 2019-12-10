@@ -74,14 +74,22 @@ class CameraFragment : Fragment() {
     }
 
     private fun checkPersmission(): Boolean {
-        return (ContextCompat.checkSelfPermission(requireContext(), android.Manifest.permission.CAMERA) ==
-                PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(requireContext(),
-            android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
+        val camerperm = ContextCompat.checkSelfPermission(requireContext(),
+            android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
+
+        val readperm = ContextCompat.checkSelfPermission(requireContext(),
+            android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+
+        val writeperm = ContextCompat.checkSelfPermission(requireContext(),
+            android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+
+        return (camerperm && readperm && writeperm)
     }
 
     private fun requestPermission() {
         ActivityCompat.requestPermissions(requireActivity(), arrayOf(
             Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.CAMERA
         ),
             PERMISSION_REQUEST_CODE)
@@ -142,19 +150,8 @@ class CameraFragment : Fragment() {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
 
 
-//            CropImage.activity(imageUri)
-//                .start(requireContext(), this);
-
             binding.cropImageView.setImageUriAsync(imageUri);
 
-//            binding.cropImageView.setOnCropImageCompleteListener{
-//                view: CropImageView, result: CropImageView.CropResult ->
-//
-//                val cropped:Bitmap = binding.cropImageView.getCroppedImage();
-//                // val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
-//
-//                println(getImageUriFromBitmap(requireContext(), cropped, System.currentTimeMillis().toString()))
-//            }
 
             binding.cropImageView.setOnCropImageCompleteListener{
                     view: CropImageView, result: CropImageView.CropResult ->
@@ -165,9 +162,6 @@ class CameraFragment : Fragment() {
 
                 val newUrl = getImageUriFromBitmap(requireContext(),cropped, System.currentTimeMillis().toString())
                 println(newUrl)
-                // val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
-
-//                    println(getImageUriFromBitmap(requireContext(), cropped, System.currentTimeMillis().toString()))
             }
 
 
