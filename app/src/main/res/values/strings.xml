@@ -15,4 +15,5 @@
     <string name="total_size_msg">Total data stored with Notely:</string>
     <string name="choose_btn">Choose</string>
     <string name="upload_btn">Upload</string>
+    <string name="crop_button">Crop</string>
 </resources>

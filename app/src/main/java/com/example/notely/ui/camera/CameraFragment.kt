@@ -46,7 +46,7 @@ class CameraFragment : Fragment() {
         cameraViewModel =
             ViewModelProviders.of(this).get(CameraViewModel::class.java)
 
-        binding = DataBindingUtil.inflate<FragmentCameraBinding>(
+        binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_camera, container, false)
         binding.camera
 
@@ -56,16 +56,16 @@ class CameraFragment : Fragment() {
     }
 
     private fun checkPersmission(): Boolean {
-        val camerperm = ContextCompat.checkSelfPermission(requireContext(),
+        val cameraPerm = ContextCompat.checkSelfPermission(requireContext(),
             Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
 
-        val readperm = ContextCompat.checkSelfPermission(requireContext(),
+        val readPerm = ContextCompat.checkSelfPermission(requireContext(),
             Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
 
-        val writeperm = ContextCompat.checkSelfPermission(requireContext(),
+        val writePerm = ContextCompat.checkSelfPermission(requireContext(),
             Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
 
-        return (camerperm && readperm && writeperm)
+        return (cameraPerm && readPerm && writePerm)
     }
 
     private fun requestPermission() {
