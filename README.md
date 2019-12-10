@@ -13,15 +13,18 @@
  - Firebase used for Authentication
  - Photos taken by the user can be uploaded to the cloud
 
+![Notely Logo](./Presentation/sign_in.png?raw=true "Cropper")
+
 ---
 
 ## Camera
 
-[*Cropper screenshot*]
-
 - App sends an intent to the system's camera
 - Photo is collected by the app
 - Photo is then automatically opened in a cropper tool
+
+![Notely Logo](./Presentation/cropper.png?raw=true "Before")
+![Notely Logo](./Presentation/cropped.png?raw=true "After")
 
 ---
 
@@ -30,10 +33,13 @@
 [*File fragment screenshot*]
 
 - App allows the user to view any files that are on FireBase storage
+- Files shown are all stored on the cloud
 - User can also pick files on their phone to upload to the cloud
 
 
 [*Insert an embedded YouTube video demonstration of the app*]
+
+[*See http://sviridovserg.com/2017/05/22/embed-youtube-to-markdown/ for how to embed*]
 
 ---
 
