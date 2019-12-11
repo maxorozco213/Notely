@@ -47,8 +47,8 @@ class UserViewModel : ViewModel() {
         val metadataListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val meta: UserFileMetadata? = dataSnapshot.getValue(UserFileMetadata::class.java)
-                _filesStored.value = meta?.filesStored
-                _storageUsed.value = meta?.storageUsed
+                _filesStored.value = meta?.filesStored ?: 0
+                _storageUsed.value = meta?.storageUsed ?: 0
             }
             override fun onCancelled(databaseError: DatabaseError) {
                 println("Database Error: ${databaseError.message}")
