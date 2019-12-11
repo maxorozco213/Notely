@@ -10,10 +10,15 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.notely.models.UserFileMetadata
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 
 class FilesViewModel : ViewModel() {
     private val PICK_PHOTO_REQUEST = 4
+    private val storageRef = FirebaseStorage.getInstance().reference.child("users")
+    private val db: DatabaseReference = FirebaseDatabase.getInstance().reference.child("users")
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is files Fragment"
@@ -31,12 +36,9 @@ class FilesViewModel : ViewModel() {
         frag.startActivityForResult(intent, PICK_PHOTO_REQUEST)
     }
 
-    fun uploadImage(uid: String , image: Uri?, context: Context) {
-
-        val storageRef = FirebaseStorage.getInstance().reference
-        val upImage = storageRef.child("$uid/${image?.lastPathSegment}")
-
+    fun uploadImage(uid: String, image: Uri?, context: Context, currNumFiles: Int,  currStorageSize: Long) {
         if (image != null) {
+            val upImage = storageRef.child("$uid/${image?.lastPathSegment}")
             val uploadTask = upImage.putFile(image)
             uploadTask
                 .addOnSuccessListener {
@@ -46,24 +48,13 @@ class FilesViewModel : ViewModel() {
                     upImage.downloadUrl.addOnCompleteListener{
                         println(it.result.toString())
                     }
+                    println("Transfered [${it.bytesTransferred}] bytes")
+                    val meta = UserFileMetadata(currNumFiles + 1, currStorageSize + it.bytesTransferred)
+                    db.child(uid).setValue(meta)
                 }
                 .addOnFailureListener { Log.i("FILE UPLOAD", "Failure") }
         } else {
-            Log.i("FILE UPLOAD", "more failure")
-        }
-    }
-
-    fun numberOfFiles(uid: String) {
-        val storageRef = FirebaseStorage.getInstance().reference
-        val folder = storageRef.child(uid)
-        folder.listAll().addOnSuccessListener {
-            println("Items: ")
-            println(it.items.size)
-            println("[ ")
-            for ( x in it.items ) {
-                println(x.name)
-            }
-            println("]")
+            Toast.makeText(context, "No Image Selected", Toast.LENGTH_SHORT).show()
         }
     }
 
