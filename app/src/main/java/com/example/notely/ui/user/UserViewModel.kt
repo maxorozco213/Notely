@@ -43,8 +43,6 @@ class UserViewModel : ViewModel() {
         listenForDBChange()
     }
 
-
-
     private fun listenForDBChange() {
         val metadataListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
