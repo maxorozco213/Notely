@@ -62,13 +62,6 @@ class CameraFragment : Fragment() {
         binding.camera
 
         if (checkPersmission()) takePicture() else requestPermission()
-
-//        val textView: TextView = binding.textCamera
-//
-//        cameraViewModel.text.observe(this, Observer {
-//            textView.text = it
-//        })
-
         return binding.root
     }
 
