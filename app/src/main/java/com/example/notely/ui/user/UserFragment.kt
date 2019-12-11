@@ -26,13 +26,16 @@ class UserFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         userViewModel =
             ViewModelProviders.of(this).get(UserViewModel::class.java)
         filesViewModel =
             ViewModelProviders.of(this).get(FilesViewModel::class.java)
+
         val binding = DataBindingUtil.inflate<FragmentUserBinding>(
             inflater, R.layout.fragment_user, container, false)
         binding.user = this
+
         userViewModel.user.observe(this, Observer {
             if ( it == null ) {
                 findNavController().navigate(R.id.action_navigation_user_to_navigation_login)
@@ -41,8 +44,6 @@ class UserFragment : Fragment() {
                     name.text = it.displayName
                     textViewLinkedAcct.text = it.email
                 }
-
-                filesViewModel.numberOfFiles(userViewModel.user.value!!.uid)
             }
         })
         userViewModel.filesStored.observe(this, Observer {
@@ -54,7 +55,6 @@ class UserFragment : Fragment() {
         binding.btnSignOut.setOnClickListener { userViewModel.signOut() }
         return binding.root
     }
-
 
     /*
     * This function to format into the correct byte units was translated to

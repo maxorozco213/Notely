@@ -50,12 +50,11 @@ class FilesFragment : Fragment() {
         testBtn1.setOnClickListener {
             upload()
         }
-
         return binding.root
     }
 
     private fun upload(){
-        if(userViewModel.user.value == null){
+        if(userViewModel.user.value == null) {
             findNavController().navigate(R.id.action_navigation_files_to_navigation_login)
             return
         }
@@ -64,7 +63,8 @@ class FilesFragment : Fragment() {
         val space = userViewModel.storageUsed.value ?: 0
 
         filesViewModel.uploadImage(uid, image, requireContext(), files, space)
-
+        // after image has been uploaded, reset so that user must select another image if desired
+        image = null
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         // Check which request we're responding to

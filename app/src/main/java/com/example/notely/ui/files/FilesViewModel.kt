@@ -17,6 +17,8 @@ import com.google.firebase.storage.FirebaseStorage
 
 class FilesViewModel : ViewModel() {
     private val PICK_PHOTO_REQUEST = 4
+    private val storageRef = FirebaseStorage.getInstance().reference.child("users")
+    private val db: DatabaseReference = FirebaseDatabase.getInstance().reference.child("users")
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is files Fragment"
@@ -35,12 +37,8 @@ class FilesViewModel : ViewModel() {
     }
 
     fun uploadImage(uid: String, image: Uri?, context: Context, currNumFiles: Int,  currStorageSize: Long) {
-
-        val storageRef = FirebaseStorage.getInstance().reference
-        val upImage = storageRef.child("$uid/${image?.lastPathSegment}")
-        val db: DatabaseReference = FirebaseDatabase.getInstance().reference.child("users")
-
         if (image != null) {
+            val upImage = storageRef.child("$uid/${image?.lastPathSegment}")
             val uploadTask = upImage.putFile(image)
             uploadTask
                 .addOnSuccessListener {
@@ -56,7 +54,7 @@ class FilesViewModel : ViewModel() {
                 }
                 .addOnFailureListener { Log.i("FILE UPLOAD", "Failure") }
         } else {
-            Log.i("FILE UPLOAD", "more failure")
+            Toast.makeText(context, "No Image Selected", Toast.LENGTH_SHORT).show()
         }
     }
 
