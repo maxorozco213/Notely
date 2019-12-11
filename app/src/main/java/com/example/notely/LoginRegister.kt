@@ -28,8 +28,11 @@ class LoginRegister : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login_register, container, false)
-        userViewModel =
-            ViewModelProviders.of(this).get(UserViewModel::class.java)
+
+        userViewModel = activity?.run {
+            ViewModelProviders.of(this)[UserViewModel::class.java]
+        } ?: throw Exception("Invalid Activity: attempted access in LoginFrag")
+
         userViewModel.setUpClient(getString(R.string.default_web_client_id), requireContext())
         userViewModel.user.observe(this, Observer {
             if ( it != null )

@@ -29,12 +29,13 @@ class FilesFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        userViewModel = activity?.run {
+            ViewModelProviders.of(this)[UserViewModel::class.java]
+        } ?: throw Exception("Invalid Activity: attempted access in FilesFrag")
 
-        filesViewModel =
-            ViewModelProviders.of(this).get(FilesViewModel::class.java)
-
-        userViewModel =
-            ViewModelProviders.of(this).get(UserViewModel::class.java)
+        filesViewModel = activity?.run {
+            ViewModelProviders.of(this)[FilesViewModel::class.java]
+        } ?: throw Exception("Invalid Activity: attempted access in FilesFrag")
 
         val binding = DataBindingUtil.inflate<FragmentFilesBinding>(
             inflater, R.layout.fragment_files, container, false)
