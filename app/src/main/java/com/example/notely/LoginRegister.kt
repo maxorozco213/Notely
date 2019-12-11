@@ -38,6 +38,7 @@ class LoginRegister : Fragment() {
         binding.signInButton.setOnClickListener{ userViewModel.signIn(this) }
         return binding.root
     }
+
     private val job = Job()
     private var scope = CoroutineScope(Dispatchers.IO + job)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

@@ -37,10 +37,12 @@ class UserViewModel : ViewModel() {
 
     private var job = Job()
     private val scope = CoroutineScope(Dispatchers.IO + job)
+    private var dbListener: ValueEventListener? = null
 
     init {
         _user.value = auth.currentUser
         listenForDBChange()
+        println("viewmodel initialized")
     }
 
     private fun listenForDBChange() {
@@ -54,8 +56,23 @@ class UserViewModel : ViewModel() {
                 println("Database Error: ${databaseError.message}")
             }
         }
+        println("current user = ${_user.value?.uid}")
         val uid = _user.value?.uid ?: return
-        db.child(uid).addValueEventListener(metadataListener)
+        if ( dbListener == null ) {
+            dbListener = db.child(uid).addValueEventListener(metadataListener)
+            println("listener added")
+        } else
+            println("listener not added")
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        val uid = _user.value?.uid ?: return
+        if ( dbListener != null ) {
+            db.child(uid).removeEventListener(dbListener!!)
+            println("removed dangling listener")
+        }
+        println("viewmodel cleared")
     }
 
     fun setUpClient(webClientID: String, context: Context) {
