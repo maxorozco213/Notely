@@ -67,13 +67,13 @@ class CameraFragment : Fragment() {
 
     private fun checkPersmission(): Boolean {
         val camerperm = ContextCompat.checkSelfPermission(requireContext(),
-            android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
+            Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
 
         val readperm = ContextCompat.checkSelfPermission(requireContext(),
-            android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+            Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
 
         val writeperm = ContextCompat.checkSelfPermission(requireContext(),
-            android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+            Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
 
         return (camerperm && readperm && writeperm)
     }
@@ -96,14 +96,6 @@ class CameraFragment : Fragment() {
 
                     takePicture()
                 }
-//                } else {
-//                    Toast.makeText(this,"Permission Denied", Toast.LENGTH_SHORT).show()
-//                }
-                return
-            }
-
-            else -> {
-
             }
         }
     }
@@ -124,7 +116,6 @@ class CameraFragment : Fragment() {
     }
 
     private fun takePicture() {
-
         val intent: Intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         val file: File = createFile()
 
