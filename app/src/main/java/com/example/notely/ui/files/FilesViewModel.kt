@@ -10,6 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.notely.models.UserFileMetadata
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 
 class FilesViewModel : ViewModel() {
@@ -31,10 +34,11 @@ class FilesViewModel : ViewModel() {
         frag.startActivityForResult(intent, PICK_PHOTO_REQUEST)
     }
 
-    fun uploadImage(uid: String , image: Uri?, context: Context) {
+    fun uploadImage(uid: String, image: Uri?, context: Context, currNumFiles: Int,  currStorageSize: Long) {
 
         val storageRef = FirebaseStorage.getInstance().reference
         val upImage = storageRef.child("$uid/${image?.lastPathSegment}")
+        val db: DatabaseReference = FirebaseDatabase.getInstance().reference.child("users")
 
         if (image != null) {
             val uploadTask = upImage.putFile(image)
@@ -46,6 +50,9 @@ class FilesViewModel : ViewModel() {
                     upImage.downloadUrl.addOnCompleteListener{
                         println(it.result.toString())
                     }
+                    println("Transfered [${it.bytesTransferred}] bytes")
+                    val meta = UserFileMetadata(currNumFiles + 1, currStorageSize + it.bytesTransferred)
+                    db.child(uid).setValue(meta)
                 }
                 .addOnFailureListener { Log.i("FILE UPLOAD", "Failure") }
         } else {
@@ -61,7 +68,9 @@ class FilesViewModel : ViewModel() {
             println(it.items.size)
             println("[ ")
             for ( x in it.items ) {
-                println(x.name)
+                x.metadata.addOnCompleteListener{
+                    println("${x.name} has ${it.result?.sizeBytes} bytes")
+                }
             }
             println("]")
         }

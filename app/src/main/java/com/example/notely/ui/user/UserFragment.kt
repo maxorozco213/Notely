@@ -30,14 +30,23 @@ class UserFragment : Fragment() {
         val binding = DataBindingUtil.inflate<FragmentUserBinding>(
             inflater, R.layout.fragment_user, container, false)
         binding.user = this
-
         userViewModel.user.observe(this, Observer {
             if ( it == null ) {
                 findNavController().navigate(R.id.action_navigation_user_to_navigation_login)
+            } else {
+                binding.apply {
+                    name.text = it.displayName
+                    textViewLinkedAcct.text = it.email
+                }
+
+                filesViewModel.numberOfFiles(userViewModel.user.value!!.uid)
             }
         })
-        userViewModel.user.observe(this, Observer {
-            binding.name.text = it?.displayName ?: "Not signed in"
+        userViewModel.filesStored.observe(this, Observer {
+            binding.textViewFilesStored.text = it.toString()
+        })
+        userViewModel.storageUsed.observe(this, Observer {
+            binding.textViewTotalSize.text = it.toString()
         })
         binding.btnSignOut.setOnClickListener { userViewModel.signOut() }
         return binding.root
