@@ -1,31 +1,55 @@
 # Notely
- > *Knowledge is power!*
+ ### ***Knowledge is power!***
 
-## Camera Fragment
-  - [ ] Shall take a picture within this fragment
-  - [ ] Shall allow the users to keep or retake the photo within.
-  - [ ] Shall go to the photo edit fragment if the keep button is chosen. 
+![Notely Logo](./app/src/main/res/drawable/notely_logo.png?raw=true "Logo")
+
 ---
-## Photo Edit Fragment 
-  - [ ] Shall be able to allow users to crop photo using drag motion. 
-  - [ ] Shall be able to save. 
-  - [ ] Shall redirect to folders. 
+
+## User Login
+
+[*User login screenshot here*]
+
+ - User can login using their Google account
+ - Firebase used for Authentication
+ - Photos taken by the user can be uploaded to the cloud
+
+![Notely Logo](./Presentation/sign_in.png?raw=true "Cropper")
+
 ---
-## Folder Fragment
-  - [ ] Shall allow users to view files. 
-  - [ ] Shall allow users to create sub folders. 
-  - [ ] Shall Redirect to menu.
+
+## Camera
+
+- App sends an intent to the system's camera
+- Photo is collected by the app
+- Photo is then automatically opened in a cropper tool
+
+![Notely Logo](./Presentation/cropper.png?raw=true "Before")
+![Notely Logo](./Presentation/cropped.png?raw=true "After")
+
 ---
-## Login/Register Fragment
-  - [ ] Shall allow users to create a user or login into their current account. 
-  - [ ] Shall redirect to menu. 
- ---
-## Menu Fragment 
-  - [ ] Shall show recent files uploaded. 
-  - [ ] Shall allow users to decided whether to take a photo or move to the folders fragment to view all files. 
-  - [ ] Shall allow users to Go to the login/ register fragment.
-  - [ ] If logged in, the user shall go to the user info fragment instead of the login/ register fragment. 
----  
-## UserInfo Fragment
-  - [ ] Shall display the users information that is used to register.
-  - [ ] Shall display the amount of data the user currently stored. 
+
+## User files
+
+[*File fragment screenshot*]
+
+- App allows the user to view any files that are on FireBase storage
+- Files shown are all stored on the cloud
+- User can also pick files on their phone to upload to the cloud
+
+
+[*Insert an embedded YouTube video demonstration of the app*]
+
+[*See http://sviridovserg.com/2017/05/22/embed-youtube-to-markdown/ for how to embed*]
+
+---
+
+## Concepts
+
+### Some concepts used in the making of Notely
+
+- Data binding
+- Cloud and APIs
+- Local database storage
+- Authentication
+- View Model Model View paradigm
+- Intents and permissions

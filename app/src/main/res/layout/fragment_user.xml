@@ -20,6 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/margin_med"
             android:text="@string/sign_out"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -29,6 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_med"
             android:textSize="@dimen/text_med"
+            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="@+id/btn_sign_out"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/btn_sign_out" />
@@ -41,6 +43,7 @@
             android:layout_marginTop="@dimen/margin_lg"
             android:text="@string/linked_acct_msg"
             android:textSize="@dimen/text_normal"
+            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/name" />
 
@@ -50,6 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_med"
             android:layout_marginTop="@dimen/margin_med"
+            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_view_linked_acct_msg"
             tools:text="test" />
@@ -61,6 +65,7 @@
             android:layout_marginStart="@dimen/margin_med"
             android:layout_marginTop="@dimen/margin_lg"
             android:text="@string/files_stored_msg"
+            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_view_linked_acct" />
 
@@ -70,6 +75,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_med"
             android:layout_marginTop="@dimen/margin_med"
+            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_view_files_stored_msg"
             tools:text="test" />
@@ -81,6 +87,7 @@
             android:layout_marginStart="@dimen/margin_med"
             android:layout_marginTop="@dimen/margin_lg"
             android:text="@string/total_size_msg"
+            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_view_files_stored" />
 
@@ -90,6 +97,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_med"
             android:layout_marginTop="@dimen/margin_med"
+            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_view_total_size_msg"
             tools:text="test" />

@@ -1,12 +1,9 @@
 <resources>
     <string name="app_name">Notely</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="notely_title">Notely</string>
     <string name="user_nav">User Info</string>
     <string name="cam_nav">Camera</string>
     <string name="file_nav">Files</string>
-    <string name="title_activity_main2">Main2Activity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
@@ -16,4 +13,7 @@
     <string name="linked_acct_msg">Your Notely account is linked with:</string>
     <string name="files_stored_msg">Images store with Notely:</string>
     <string name="total_size_msg">Total data stored with Notely:</string>
+    <string name="choose_btn">Choose</string>
+    <string name="upload_btn">Upload</string>
+    <string name="crop_button">Crop</string>
 </resources>

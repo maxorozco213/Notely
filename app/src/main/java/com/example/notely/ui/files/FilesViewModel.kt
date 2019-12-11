@@ -13,11 +13,7 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.storage.FirebaseStorage
 
 class FilesViewModel : ViewModel() {
-
     private val PICK_PHOTO_REQUEST = 4
-    private var image: Uri? = null
-    private lateinit var mFilesAdapter: FilesRecyclerAdapter
-    private lateinit var PATH: String
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is files Fragment"
