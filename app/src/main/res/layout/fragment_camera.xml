@@ -65,7 +65,7 @@
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cropImageView"
-            app:layout_constraintVertical_bias="0.248" />
+            app:layout_constraintVertical_bias="0.164" />
 
         <ImageView
             android:id="@+id/croppedImage"
