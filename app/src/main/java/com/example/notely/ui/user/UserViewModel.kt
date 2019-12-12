@@ -37,13 +37,16 @@ class UserViewModel : ViewModel() {
 
     private var job = Job()
     private val scope = CoroutineScope(Dispatchers.IO + job)
+    private var dbListener: ValueEventListener? = null
 
     init {
         _user.value = auth.currentUser
         listenForDBChange()
+        println("viewmodel initialized")
     }
 
     private fun listenForDBChange() {
+        println("adding listener ...")
         val metadataListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val meta: UserFileMetadata? = dataSnapshot.getValue(UserFileMetadata::class.java)
@@ -54,8 +57,28 @@ class UserViewModel : ViewModel() {
                 println("Database Error: ${databaseError.message}")
             }
         }
+        println("current user = ${_user.value?.uid}")
         val uid = _user.value?.uid ?: return
-        db.child(uid).addValueEventListener(metadataListener)
+        if ( dbListener == null ) {
+            dbListener = db.child(uid).addValueEventListener(metadataListener)
+            println("listener added")
+        } else
+            println("listener not added")
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        removeListener()
+    }
+
+    private fun removeListener() {
+        val uid = _user.value?.uid ?: return
+        if ( dbListener != null ) {
+            db.child(uid).removeEventListener(dbListener!!)
+            dbListener = null
+            println("removed dangling listener")
+        }
+        println("viewmodel cleared")
     }
 
     fun setUpClient(webClientID: String, context: Context) {
@@ -87,6 +110,7 @@ class UserViewModel : ViewModel() {
         scope.launch {
             deAuth()
         }
+        removeListener()
         _user.value = null
     }
 
@@ -102,7 +126,10 @@ class UserViewModel : ViewModel() {
         auth.signInWithCredential(credential)
             .addOnCompleteListener { task ->
                 when ( task.isSuccessful ) {
-                    true -> _user.value = auth.currentUser
+                    true -> {
+                        _user.value = auth.currentUser
+                        listenForDBChange()
+                    }
                     else -> _user.value = null
                 }
             }
