@@ -46,6 +46,7 @@ class UserViewModel : ViewModel() {
     }
 
     private fun listenForDBChange() {
+        println("adding listener ...")
         val metadataListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val meta: UserFileMetadata? = dataSnapshot.getValue(UserFileMetadata::class.java)
@@ -67,6 +68,10 @@ class UserViewModel : ViewModel() {
 
     override fun onCleared() {
         super.onCleared()
+        removeListener()
+    }
+
+    private fun removeListener() {
         val uid = _user.value?.uid ?: return
         if ( dbListener != null ) {
             db.child(uid).removeEventListener(dbListener!!)
@@ -104,6 +109,7 @@ class UserViewModel : ViewModel() {
         scope.launch {
             deAuth()
         }
+        removeListener()
         _user.value = null
     }
 
@@ -119,7 +125,10 @@ class UserViewModel : ViewModel() {
         auth.signInWithCredential(credential)
             .addOnCompleteListener { task ->
                 when ( task.isSuccessful ) {
-                    true -> _user.value = auth.currentUser
+                    true -> {
+                        _user.value = auth.currentUser
+                        listenForDBChange()
+                    }
                     else -> _user.value = null
                 }
             }

@@ -16,7 +16,6 @@ import com.example.notely.databinding.FragmentLoginRegisterBinding
 import com.example.notely.ui.user.UserViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.common.api.ApiException
-import kotlinx.coroutines.*
 
 class LoginRegister : Fragment() {
 
@@ -42,30 +41,20 @@ class LoginRegister : Fragment() {
         return binding.root
     }
 
-    private val job = Job()
-    private var scope = CoroutineScope(Dispatchers.IO + job)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        scope.launch {
-            oAR(requestCode, resultCode, data)
-        }
-    }
+        super.onActivityResult(requestCode, resultCode, data)
 
-    private suspend fun oAR(requestCode: Int, resultCode: Int, data: Intent?) {
-        withContext(Dispatchers.IO) {
-            super.onActivityResult(requestCode, resultCode, data)
-
-            // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-            if (requestCode == userViewModel.RC_SIGN_IN) {
-                val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-                try {
-                    // Google Sign In was successful, authenticate with Firebase
-                    val account = task.getResult(ApiException::class.java)
-                    userViewModel.firebaseAuthWithGoogle(account!!)
-                } catch (e: ApiException) {
-                    println("Google sign in failed")
-                    Toast.makeText(requireContext(), "Google sign in failed", LENGTH_LONG).show()
-                    e.printStackTrace()
-                }
+        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        if (requestCode == userViewModel.RC_SIGN_IN) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            try {
+                // Google Sign In was successful, authenticate with Firebase
+                val account = task.getResult(ApiException::class.java)
+                userViewModel.firebaseAuthWithGoogle(account!!)
+            } catch (e: ApiException) {
+                println("Google sign in failed")
+                Toast.makeText(requireContext(), "Google sign in failed", LENGTH_LONG).show()
+                e.printStackTrace()
             }
         }
     }
