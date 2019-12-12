@@ -29,12 +29,13 @@ class FilesFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        userViewModel = activity?.run {
+            ViewModelProviders.of(this)[UserViewModel::class.java]
+        } ?: throw Exception("Invalid Activity: attempted access in FilesFrag")
 
-        filesViewModel =
-            ViewModelProviders.of(this).get(FilesViewModel::class.java)
-
-        userViewModel =
-            ViewModelProviders.of(this).get(UserViewModel::class.java)
+        filesViewModel = activity?.run {
+            ViewModelProviders.of(this)[FilesViewModel::class.java]
+        } ?: throw Exception("Invalid Activity: attempted access in FilesFrag")
 
         val binding = DataBindingUtil.inflate<FragmentFilesBinding>(
             inflater, R.layout.fragment_files, container, false)
@@ -50,19 +51,21 @@ class FilesFragment : Fragment() {
         testBtn1.setOnClickListener {
             upload()
         }
-
         return binding.root
     }
 
     private fun upload(){
-        val uid = userViewModel.user.value?.uid
-        if(uid == null){
+        if(userViewModel.user.value == null) {
             findNavController().navigate(R.id.action_navigation_files_to_navigation_login)
             return
         }
+        val uid = userViewModel.user.value!!.uid
+        val files = userViewModel.filesStored.value ?: 0
+        val space = userViewModel.storageUsed.value ?: 0
 
-        filesViewModel.uploadImage(uid,image,requireContext())
-
+        filesViewModel.uploadImage(uid, image, requireContext(), files, space)
+        // after image has been uploaded, reset so that user must select another image if desired
+        image = null
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

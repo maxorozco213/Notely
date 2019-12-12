@@ -16,7 +16,6 @@ import com.example.notely.databinding.FragmentLoginRegisterBinding
 import com.example.notely.ui.user.UserViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.common.api.ApiException
-import kotlinx.coroutines.*
 
 class LoginRegister : Fragment() {
 
@@ -28,8 +27,11 @@ class LoginRegister : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login_register, container, false)
-        userViewModel =
-            ViewModelProviders.of(this).get(UserViewModel::class.java)
+
+        userViewModel = activity?.run {
+            ViewModelProviders.of(this)[UserViewModel::class.java]
+        } ?: throw Exception("Invalid Activity: attempted access in LoginFrag")
+
         userViewModel.setUpClient(getString(R.string.default_web_client_id), requireContext())
         userViewModel.user.observe(this, Observer {
             if ( it != null )
@@ -38,17 +40,10 @@ class LoginRegister : Fragment() {
         binding.signInButton.setOnClickListener{ userViewModel.signIn(this) }
         return binding.root
     }
-    private val job = Job()
-    private var scope = CoroutineScope(Dispatchers.IO + job)
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        scope.launch {
-            oAR(requestCode, resultCode, data)
-        }
-    }
 
-    private suspend fun oAR(requestCode: Int, resultCode: Int, data: Intent?) {
-        withContext(Dispatchers.IO) {
-            super.onActivityResult(requestCode, resultCode, data)
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
 
             // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
             if (requestCode == userViewModel.RC_SIGN_IN) {
@@ -62,6 +57,7 @@ class LoginRegister : Fragment() {
 //                    Toast.makeText(requireContext(), "Google sign in failed", LENGTH_LONG).show()
                     e.printStackTrace()
                 }
+
             }
         }
     }
