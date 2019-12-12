@@ -19,7 +19,6 @@
             android:id="@+id/cropImageView"
             android:layout_width="306dp"
             android:layout_height="430dp"
-
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
@@ -30,7 +29,7 @@
         </com.theartofdev.edmodo.cropper.CropImageView>
 
         <Button
-            android:id="@+id/crop"
+            android:id="@+id/crop_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/crop_button"
@@ -43,7 +42,7 @@
             app:layout_constraintVertical_bias="0.248" />
 
         <ImageView
-            android:id="@+id/croppedimage"
+            android:id="@+id/croppedImage"
             android:layout_width="306dp"
             android:layout_height="430dp"
             android:visibility="invisible"
@@ -52,7 +51,36 @@
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.053" />
+            app:layout_constraintVertical_bias="0.053"
+            tools:ignore="ContentDescription" />
+
+        <Button
+            android:id="@+id/take_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="68dp"
+            android:layout_marginTop="59dp"
+            android:layout_marginBottom="178dp"
+            android:text="@string/take_photo"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/crop_btn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cropImageView" />
+
+        <Button
+            android:id="@+id/choose_to_crop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="59dp"
+            android:layout_marginEnd="81dp"
+            android:layout_marginBottom="178dp"
+            android:text="@string/pick_photo"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/crop_btn"
+            app:layout_constraintTop_toBottomOf="@+id/cropImageView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,6 +1,9 @@
+@file:Suppress("DEPRECATED_IDENTITY_EQUALS")
+
 package com.example.notely.ui.camera
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -17,6 +20,7 @@ import android.widget.Toast.LENGTH_LONG
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
@@ -30,13 +34,13 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class CameraFragment : Fragment() {
-    private lateinit var cameraViewModel: CameraViewModel
     val REQUEST_IMAGE_CAPTURE = 1
-    private lateinit var binding: FragmentCameraBinding
     private val PERMISSION_REQUEST_CODE: Int = 101
+    private val PICK_PHOTO_REQUEST = 4
     private var mCurrentPhotoPath: String? = null
     private var imageUri: Uri? = null
-
+    private lateinit var cameraViewModel: CameraViewModel
+    private lateinit var binding: FragmentCameraBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,12 +54,52 @@ class CameraFragment : Fragment() {
             inflater, R.layout.fragment_camera, container, false)
         binding.camera
 
-        if (checkPersmission()) takePicture() else requestPermission()
+        if(!checkPermissions()) {
+            requestPermission()
+        }
+
+        binding.takePhoto.setOnClickListener @Suppress("UNUSED_ANONYMOUS_PARAMETER")
+        {view: View ->
+            takePicture()
+        }
+
+        binding.chooseToCrop.setOnClickListener @Suppress("UNUSED_ANONYMOUS_PARAMETER")
+        {view: View ->
+            pickPhoto()
+        }
+
+        binding.cropImageView.setOnCropImageCompleteListener{
+                _: CropImageView, _: CropImageView.CropResult ->
+
+            val cropped:Bitmap = binding.cropImageView.croppedImage
+            binding.croppedImage.setImageBitmap(cropped)
+            val newUrl = getImageUriFromBitmap(cropped, System.currentTimeMillis().toString())
+            println(newUrl)
+        }
+
+        binding.cropBtn.setOnClickListener{
+            println("button clicked")
+            binding.cropImageView.getCroppedImageAsync()
+            println("yo dawggggg")
+            binding.cropBtn.visibility = View.GONE
+            binding.cropImageView.visibility = View.GONE
+            binding.croppedImage.visibility = View.VISIBLE
+
+            Toast.makeText(requireContext(), "Cropped image saved", LENGTH_LONG).show()
+        }
 
         return binding.root
     }
 
-    private fun checkPersmission(): Boolean {
+    private fun pickPhoto() {
+        val intent = Intent(
+            Intent.ACTION_PICK,
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+
+        startActivityForResult(intent, PICK_PHOTO_REQUEST)
+    }
+
+    private fun checkPermissions(): Boolean {
         val cameraPerm = ContextCompat.checkSelfPermission(requireContext(),
             Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
 
@@ -80,9 +124,8 @@ class CameraFragment : Fragment() {
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         when (requestCode) {
             PERMISSION_REQUEST_CODE -> {
-
                 if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)
-                    &&grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                    && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
 
                     takePicture()
                 }
@@ -90,6 +133,7 @@ class CameraFragment : Fragment() {
         }
     }
 
+    @SuppressLint("SimpleDateFormat")
     @Throws(IOException::class)
     private fun createFile(): File {
         // Create an image file name
@@ -115,35 +159,27 @@ class CameraFragment : Fragment() {
             file
         )
 
-        intent.putExtra(MediaStore.EXTRA_OUTPUT,imageUri)
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
         startActivityForResult(intent, REQUEST_IMAGE_CAPTURE)
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
-            binding.crop.visibility = View.VISIBLE
             binding.cropImageView.setImageUriAsync(imageUri)
-            binding.cropImageView.setOnCropImageCompleteListener{
 
-                    _: CropImageView, _: CropImageView.CropResult ->
+            binding.chooseToCrop.isVisible = false
+            binding.takePhoto.isVisible = false
+            binding.cropBtn.isVisible = true
 
-                val cropped:Bitmap = binding.cropImageView.croppedImage
+        } else if (requestCode === PICK_PHOTO_REQUEST && resultCode === Activity.RESULT_OK) {
+            imageUri = data?.data
 
-                binding.croppedimage.setImageBitmap(cropped)
+            binding.cropImageView.setImageUriAsync(imageUri)
+            binding.chooseToCrop.isVisible = false
+            binding.takePhoto.isVisible = false
+            binding.cropBtn.isVisible = true
 
-                val newUrl = getImageUriFromBitmap(cropped, System.currentTimeMillis().toString())
-                println(newUrl)
-            }
-
-
-            binding.crop.setOnClickListener{
-                binding.cropImageView.getCroppedImageAsync()
-                binding.crop.visibility = View.GONE
-                binding.cropImageView.visibility = View.GONE
-                binding.croppedimage.visibility = View.VISIBLE
-                Toast.makeText(requireContext(), "Cropped image saved", LENGTH_LONG).show()
-            }
+            Toast.makeText(requireContext(), "Photo selected", LENGTH_LONG).show()
 
         }
     }

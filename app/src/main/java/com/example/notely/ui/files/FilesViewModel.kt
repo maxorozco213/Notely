@@ -6,6 +6,7 @@ import android.net.Uri
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
+import android.widget.Toast.LENGTH_LONG
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -37,12 +38,13 @@ class FilesViewModel : ViewModel() {
     }
 
     fun uploadImage(uid: String, image: Uri?, context: Context, currNumFiles: Int,  currStorageSize: Long) {
+
         if (image != null) {
             val upImage = storageRef.child("$uid/${image?.lastPathSegment}")
             val uploadTask = upImage.putFile(image)
             uploadTask
                 .addOnSuccessListener {
-                    Toast.makeText(context, "Upload Successful", Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, "Upload Successful", LENGTH_LONG).show()
                     Log.i("FILE UPLOAD", "Success")
                     println("Download url:")
                     upImage.downloadUrl.addOnCompleteListener{

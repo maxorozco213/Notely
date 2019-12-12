@@ -67,8 +67,8 @@ class FilesFragment : Fragment() {
         // after image has been uploaded, reset so that user must select another image if desired
         image = null
     }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        // Check which request we're responding to
         if (requestCode == PICK_PHOTO_REQUEST && resultCode == Activity.RESULT_OK) {
             image = data?.data
             Toast.makeText(requireContext(), "Photo selected", LENGTH_LONG).show()
