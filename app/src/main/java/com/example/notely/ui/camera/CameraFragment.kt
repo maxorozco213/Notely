@@ -129,7 +129,6 @@ class CameraFragment : Fragment() {
 
                     takePicture()
                 }
-                return
             }
         }
     }
