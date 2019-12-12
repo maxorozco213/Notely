@@ -67,7 +67,7 @@ class CameraFragment : Fragment() {
         {view: View ->
             pickPhoto()
         }
-
+        // onCompletion for the crop module
         binding.cropImageView.setOnCropImageCompleteListener{
                 _: CropImageView, _: CropImageView.CropResult ->
 
@@ -76,7 +76,7 @@ class CameraFragment : Fragment() {
             val newUrl = getImageUriFromBitmap(cropped, System.currentTimeMillis().toString())
             println(newUrl)
         }
-
+        // onClick for crop button
         binding.cropBtn.setOnClickListener{
             println("button clicked")
             binding.cropImageView.getCroppedImageAsync()
@@ -169,6 +169,8 @@ class CameraFragment : Fragment() {
 
             binding.chooseToCrop.isVisible = false
             binding.takePhoto.isVisible = false
+            binding.camIconView.isVisible = false
+            binding.albumIconView.isVisible = false
             binding.cropBtn.isVisible = true
 
         } else if (requestCode === PICK_PHOTO_REQUEST && resultCode === Activity.RESULT_OK) {
@@ -177,6 +179,8 @@ class CameraFragment : Fragment() {
             binding.cropImageView.setImageUriAsync(imageUri)
             binding.chooseToCrop.isVisible = false
             binding.takePhoto.isVisible = false
+            binding.camIconView.isVisible = false
+            binding.albumIconView.isVisible = false
             binding.cropBtn.isVisible = true
 
             Toast.makeText(requireContext(), "Photo selected", LENGTH_LONG).show()
