@@ -59,7 +59,7 @@ class LoginRegister : Fragment() {
                     userViewModel.firebaseAuthWithGoogle(account!!)
                 } catch (e: ApiException) {
                     println("Google sign in failed")
-                    Toast.makeText(requireContext(), "Google sign in failed", LENGTH_LONG).show()
+//                    Toast.makeText(requireContext(), "Google sign in failed", LENGTH_LONG).show()
                     e.printStackTrace()
                 }
             }

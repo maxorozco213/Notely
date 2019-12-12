@@ -16,4 +16,6 @@
     <string name="choose_btn">Choose</string>
     <string name="upload_btn">Upload</string>
     <string name="crop_button">Crop</string>
+    <string name="take_photo">Take a photo</string>
+    <string name="pick_photo">Pick a photo</string>
 </resources>
