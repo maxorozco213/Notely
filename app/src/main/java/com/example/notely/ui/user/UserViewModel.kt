@@ -75,6 +75,7 @@ class UserViewModel : ViewModel() {
         val uid = _user.value?.uid ?: return
         if ( dbListener != null ) {
             db.child(uid).removeEventListener(dbListener!!)
+            dbListener = null
             println("removed dangling listener")
         }
         println("viewmodel cleared")
