@@ -19,9 +19,11 @@
 
 ## Camera
 
-- App sends an intent to the system's camera
-- Photo is collected by the app
+- User can choose to take a photo using the system's camera
+- User can also choose to find an existing photo on their phone to crop
+- Photo is collected by the app through intent
 - Photo is then automatically opened in a cropper tool
+- Cropper tool will then save the cropped image to the user's phone
 
 ![Notely Logo](./Presentation/cropper.png?raw=true "Before")
 ![Notely Logo](./Presentation/cropped.png?raw=true "After")
