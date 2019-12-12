@@ -15,6 +15,7 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import android.widget.Toast.LENGTH_LONG
 import androidx.core.app.ActivityCompat
@@ -67,7 +68,7 @@ class CameraFragment : Fragment() {
         {view: View ->
             pickPhoto()
         }
-
+        // onCompletion for the crop module
         binding.cropImageView.setOnCropImageCompleteListener{
                 _: CropImageView, _: CropImageView.CropResult ->
 
@@ -76,7 +77,7 @@ class CameraFragment : Fragment() {
             val newUrl = getImageUriFromBitmap(cropped, System.currentTimeMillis().toString())
             println(newUrl)
         }
-
+        // onClick for crop button
         binding.cropBtn.setOnClickListener{
             println("button clicked")
             binding.cropImageView.getCroppedImageAsync()
@@ -166,22 +167,26 @@ class CameraFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
             binding.cropImageView.setImageUriAsync(imageUri)
-
-            binding.chooseToCrop.isVisible = false
-            binding.takePhoto.isVisible = false
-            binding.cropBtn.isVisible = true
+            actResultSetVisibility()
 
         } else if (requestCode === PICK_PHOTO_REQUEST && resultCode === Activity.RESULT_OK) {
             imageUri = data?.data
 
             binding.cropImageView.setImageUriAsync(imageUri)
-            binding.chooseToCrop.isVisible = false
-            binding.takePhoto.isVisible = false
-            binding.cropBtn.isVisible = true
+            actResultSetVisibility()
 
             Toast.makeText(requireContext(), "Photo selected", LENGTH_LONG).show()
 
         }
+    }
+
+    private fun actResultSetVisibility() {
+        binding.chooseToCrop.isVisible = false
+        binding.takePhoto.isVisible = false
+        binding.camIconView.isVisible = false
+        binding.albumIconView.isVisible = false
+        binding.imagePlaceholder.isVisible = false
+        binding.cropBtn.isVisible = true
     }
 
     private fun getImageUriFromBitmap(bitmap: Bitmap, title: String): Uri{

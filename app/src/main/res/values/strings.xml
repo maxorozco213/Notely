@@ -7,7 +7,7 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-    <string name="welcome">Welcome to Notely</string>
+    <string name="welcome">Welcome to Notely!</string>
     <string name="sign_in_google">Sign in with Google to register for Notely</string>
     <string name="sign_out">Sign Out</string>
     <string name="linked_acct_msg">Your Notely account is linked with:</string>

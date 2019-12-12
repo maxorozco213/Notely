@@ -15,10 +15,36 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/image_placeholder"
+            android:layout_width="383dp"
+            android:layout_height="215dp"
+            android:layout_marginTop="-300dp"
+            android:src="@drawable/image_placeholder"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.17000002" />
+
+        <ImageView
+            android:id="@+id/cam_icon_view"
+            android:layout_width="118dp"
+            android:layout_height="84dp"
+            android:layout_marginEnd="66dp"
+            android:layout_marginBottom="13dp"
+            android:src="@drawable/cam_icon"
+            app:layout_constraintBottom_toTopOf="@+id/take_photo"
+            app:layout_constraintEnd_toStartOf="@+id/album_icon_view"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
         <com.theartofdev.edmodo.cropper.CropImageView
             android:id="@+id/cropImageView"
-            android:layout_width="306dp"
-            android:layout_height="430dp"
+            android:layout_width="389dp"
+            android:layout_height="494dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
@@ -39,12 +65,12 @@
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cropImageView"
-            app:layout_constraintVertical_bias="0.248" />
+            app:layout_constraintVertical_bias="0.164" />
 
         <ImageView
             android:id="@+id/croppedImage"
-            android:layout_width="306dp"
-            android:layout_height="430dp"
+            android:layout_width="390dp"
+            android:layout_height="490dp"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -81,6 +107,20 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/crop_btn"
             app:layout_constraintTop_toBottomOf="@+id/cropImageView" />
+
+        <ImageView
+            android:id="@+id/album_icon_view"
+            android:layout_width="113dp"
+            android:layout_height="82dp"
+            android:layout_marginTop="420dp"
+            android:layout_marginBottom="13dp"
+            android:src="@drawable/album_icon"
+            app:layout_constraintBottom_toTopOf="@+id/choose_to_crop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.791"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
