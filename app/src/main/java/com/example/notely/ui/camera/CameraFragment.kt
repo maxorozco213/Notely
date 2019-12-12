@@ -68,6 +68,26 @@ class CameraFragment : Fragment() {
             pickPhoto()
         }
 
+        binding.cropImageView.setOnCropImageCompleteListener{
+                _: CropImageView, _: CropImageView.CropResult ->
+
+            val cropped:Bitmap = binding.cropImageView.croppedImage
+            binding.croppedImage.setImageBitmap(cropped)
+            val newUrl = getImageUriFromBitmap(cropped, System.currentTimeMillis().toString())
+            println(newUrl)
+        }
+
+        binding.cropBtn.setOnClickListener{
+            println("button clicked")
+            binding.cropImageView.getCroppedImageAsync()
+            println("yo dawggggg")
+            binding.cropBtn.visibility = View.GONE
+            binding.cropImageView.visibility = View.GONE
+            binding.croppedImage.visibility = View.VISIBLE
+
+            Toast.makeText(requireContext(), "Cropped image saved", LENGTH_LONG).show()
+        }
+
         return binding.root
     }
 
@@ -147,25 +167,6 @@ class CameraFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
             binding.cropImageView.setImageUriAsync(imageUri)
-            binding.cropImageView.setOnCropImageCompleteListener{
-                    _: CropImageView, _: CropImageView.CropResult ->
-
-                val cropped:Bitmap = binding.cropImageView.croppedImage
-                binding.croppedImage.setImageBitmap(cropped)
-                val newUrl = getImageUriFromBitmap(cropped, System.currentTimeMillis().toString())
-                println(newUrl)
-            }
-
-            binding.cropBtn.setOnClickListener{
-                println("button clicked")
-                binding.cropImageView.getCroppedImageAsync()
-                println("yo dawggggg")
-                binding.cropBtn.visibility = View.GONE
-                binding.cropImageView.visibility = View.GONE
-                binding.croppedImage.visibility = View.VISIBLE
-
-                Toast.makeText(requireContext(), "Cropped image saved", LENGTH_LONG).show()
-            }
 
             binding.chooseToCrop.isVisible = false
             binding.takePhoto.isVisible = false
@@ -173,26 +174,6 @@ class CameraFragment : Fragment() {
 
         } else if (requestCode === PICK_PHOTO_REQUEST && resultCode === Activity.RESULT_OK) {
             imageUri = data?.data
-
-            binding.cropImageView.setOnCropImageCompleteListener{
-                    _: CropImageView, _: CropImageView.CropResult ->
-
-                val cropped:Bitmap = binding.cropImageView.croppedImage
-                binding.croppedImage.setImageBitmap(cropped)
-                val newUrl = getImageUriFromBitmap(cropped, System.currentTimeMillis().toString())
-                println(newUrl)
-            }
-
-            binding.cropBtn.setOnClickListener{
-                println("button clicked")
-                binding.cropImageView.getCroppedImageAsync()
-                println("yo dawggggg")
-                binding.cropBtn.visibility = View.GONE
-                binding.cropImageView.visibility = View.GONE
-                binding.croppedImage.visibility = View.VISIBLE
-
-                Toast.makeText(requireContext(), "Cropped image saved", LENGTH_LONG).show()
-            }
 
             binding.cropImageView.setImageUriAsync(imageUri)
             binding.chooseToCrop.isVisible = false
