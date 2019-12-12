@@ -8,5 +8,5 @@
     <dimen name="text_med">20sp</dimen>
     <dimen name="text_normal">15sp</dimen>
     <dimen name="text_sm">10sp</dimen>
-    <dimen name="margin_med">25dp</dimen>
+    <dimen name="margin_med">20dp</dimen>
 </resources>

@@ -55,8 +55,6 @@ class CameraFragment : Fragment() {
             inflater, R.layout.fragment_camera, container, false)
         binding.camera
 
-//        binding.cropImageView.imageResource = R.drawable.album_icon
-
         if(!checkPermissions()) {
             requestPermission()
         }
@@ -187,7 +185,7 @@ class CameraFragment : Fragment() {
         binding.takePhoto.isVisible = false
         binding.camIconView.isVisible = false
         binding.albumIconView.isVisible = false
-        binding.logoPlaceholder.isVisible = false
+        binding.imagePlaceholder.isVisible = false
         binding.cropBtn.isVisible = true
     }
 
