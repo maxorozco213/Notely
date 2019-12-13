@@ -12,6 +12,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.notely.models.UserFileMetadata
+import com.example.notely.models.UserUploads
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
@@ -29,15 +30,13 @@ class FilesViewModel : ViewModel() {
         get() = _text
 
     fun selectImage(frag: Fragment) {
-
         val intent = Intent(
             Intent.ACTION_PICK,
             MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-
         frag.startActivityForResult(intent, PICK_PHOTO_REQUEST)
     }
 
-    fun uploadImage(uid: String, image: Uri?, context: Context, currNumFiles: Int,  currStorageSize: Long) {
+    fun uploadImage(uid: String, image: Uri?, context: Context, currNumFiles: Int,  currStorageSize: Long, urls: MutableList<String>) {
         if (image != null) {
             val upImage = storageRef.child("$uid/${image.lastPathSegment}")
             val uploadTask = upImage.putFile(image)
@@ -47,9 +46,10 @@ class FilesViewModel : ViewModel() {
                     Log.i("FILE UPLOAD", "Success")
                     println("Download url:")
                     upImage.downloadUrl.addOnCompleteListener{
-                        println(it.result.toString())
+                        urls.add(it.result.toString())
+                        val links = UserUploads(urls)
+                        db.child("uploads/$uid").setValue(links)
                     }
-                    println("Transfered [${it.bytesTransferred}] bytes")
                     val meta = UserFileMetadata(currNumFiles + 1, currStorageSize + it.bytesTransferred)
                     db.child("metadata/$uid").setValue(meta)
                 }

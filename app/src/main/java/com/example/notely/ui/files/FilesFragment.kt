@@ -62,8 +62,9 @@ class FilesFragment : Fragment() {
         val uid = userViewModel.user.value!!.uid
         val files = userViewModel.filesStored.value ?: 0
         val space = userViewModel.storageUsed.value ?: 0
+        val urls = userViewModel.urls.value ?: mutableListOf()
 
-        filesViewModel.uploadImage(uid, image, requireContext(), files, space)
+        filesViewModel.uploadImage(uid, image, requireContext(), files, space, urls)
         // after image has been uploaded, reset so that user must select another image if desired
         image = null
     }
