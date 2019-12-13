@@ -40,7 +40,7 @@
 ## - App allows the user to view any of their files that are on FireBase storage
 ## - User can also pick files on their phone to upload to the cloud
 ## - Image Metadata is stored in a database. 
-## - Realtime database ia automatically synced for each user
+## - Realtime database is automatically synced for each user
 
 
 ![Recycler](./Presentation/upload-recycler.gif?raw=true "Recycler")
