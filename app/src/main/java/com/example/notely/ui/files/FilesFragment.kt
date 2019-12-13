@@ -12,8 +12,10 @@ import android.widget.Toast
 import android.widget.Toast.LENGTH_LONG
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.notely.R
 import com.example.notely.databinding.FragmentFilesBinding
 import com.example.notely.ui.user.UserViewModel
@@ -47,10 +49,15 @@ class FilesFragment : Fragment() {
         testBtn2.setOnClickListener {
             filesViewModel.selectImage(this)
         }
-
         testBtn1.setOnClickListener {
             upload()
         }
+
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        userViewModel.urls.observe(this, Observer {
+            binding.recyclerView.adapter = UploadAdapter(userViewModel.urls.value ?: mutableListOf(), requireContext())
+        })
+
         return binding.root
     }
 
@@ -62,8 +69,9 @@ class FilesFragment : Fragment() {
         val uid = userViewModel.user.value!!.uid
         val files = userViewModel.filesStored.value ?: 0
         val space = userViewModel.storageUsed.value ?: 0
+        val urls = userViewModel.urls.value ?: mutableListOf()
 
-        filesViewModel.uploadImage(uid, image, requireContext(), files, space)
+        filesViewModel.uploadImage(uid, image, requireContext(), files, space, urls)
         // after image has been uploaded, reset so that user must select another image if desired
         image = null
     }

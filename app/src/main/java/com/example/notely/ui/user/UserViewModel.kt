@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.notely.models.UserFileMetadata
+import com.example.notely.models.UserUploads
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -19,7 +20,7 @@ import kotlinx.coroutines.*
 class UserViewModel : ViewModel() {
 
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
-    private val db: DatabaseReference = FirebaseDatabase.getInstance().reference.child("users")
+    private val db: DatabaseReference = FirebaseDatabase.getInstance().reference
     private val _text = MutableLiveData<String>().apply {
         value = "This is user Fragment"
     }
@@ -34,10 +35,14 @@ class UserViewModel : ViewModel() {
     private val _storageUsed = MutableLiveData<Long>()
     val storageUsed: LiveData<Long>
         get() = _storageUsed
+    private val _urls = MutableLiveData<MutableList<String>>()
+    val urls: LiveData<MutableList<String>>
+        get() = _urls
 
     private var job = Job()
     private val scope = CoroutineScope(Dispatchers.IO + job)
-    private var dbListener: ValueEventListener? = null
+    private var metadataListener: ValueEventListener? = null
+    private var uploadsListener: ValueEventListener? = null
 
     init {
         _user.value = auth.currentUser
@@ -47,7 +52,7 @@ class UserViewModel : ViewModel() {
 
     private fun listenForDBChange() {
         println("adding listener ...")
-        val metadataListener = object : ValueEventListener {
+        val metaListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val meta: UserFileMetadata? = dataSnapshot.getValue(UserFileMetadata::class.java)
                 _filesStored.value = meta?.filesStored ?: 0
@@ -57,13 +62,25 @@ class UserViewModel : ViewModel() {
                 println("Database Error: ${databaseError.message}")
             }
         }
+        val upldListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val uploads: UserUploads? = dataSnapshot.getValue(UserUploads::class.java)
+                _urls.value = uploads?.urls ?: mutableListOf()
+            }
+            override fun onCancelled(databaseError: DatabaseError) {
+                println("Database Error: ${databaseError.message}")
+            }
+        }
         println("current user = ${_user.value?.uid}")
         val uid = _user.value?.uid ?: return
-        if ( dbListener == null ) {
-            dbListener = db.child(uid).addValueEventListener(metadataListener)
-            println("listener added")
-        } else
-            println("listener not added")
+        if ( metadataListener == null ) {
+            metadataListener = db.child("metadata/$uid").addValueEventListener(metaListener)
+            println("metadata listener added")
+        } else println("metadata listener not added")
+        if ( uploadsListener == null ) {
+            uploadsListener = db.child("uploads/$uid").addValueEventListener(upldListener)
+            println("uploads listener added")
+        } else println("uploads listener not added")
     }
 
     override fun onCleared() {
@@ -73,10 +90,15 @@ class UserViewModel : ViewModel() {
 
     private fun removeListener() {
         val uid = _user.value?.uid ?: return
-        if ( dbListener != null ) {
-            db.child(uid).removeEventListener(dbListener!!)
-            dbListener = null
-            println("removed dangling listener")
+        if ( metadataListener != null ) {
+            db.child("metadata/$uid").removeEventListener(metadataListener!!)
+            metadataListener = null
+            println("removed metadata listener")
+        }
+        if ( uploadsListener != null ) {
+            db.child("uploads/$uid").removeEventListener(uploadsListener!!)
+            uploadsListener = null
+            println("removed uploads listener")
         }
         println("viewmodel cleared")
     }
