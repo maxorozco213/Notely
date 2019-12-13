@@ -47,6 +47,7 @@
 ## Database Using Firebase
 
 - Image Metadata is stored in a database. 
+- Realtime database ia automatically synced for each user
 
 ---
 
