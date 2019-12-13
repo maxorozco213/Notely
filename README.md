@@ -54,8 +54,8 @@
 ## Some concepts used in the making of Notely
 
 ## - Data binding
-## - Cloud and APIs
-## - Local database storage
+## - Cloud database and storage
+## - Images stored locally
 ## - Authentication
 ## - Model View View Model paradigm
 ## - Intents and permissions
