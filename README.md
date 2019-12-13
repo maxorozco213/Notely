@@ -3,9 +3,9 @@
 
 ![Notely Logo](./app/src/main/res/drawable/notely_logo.png?raw=true "Logo")
 
-Jesus Mendoza
-Maxilian Orozco
-Gian Tolentino
+Jesus Mendoza,
+Maxilian Orozco,
+Gian Tolentino,
 Abraham Estrada
 ---
 
