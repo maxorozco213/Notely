@@ -14,6 +14,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.notely.R
 import com.example.notely.databinding.FragmentFilesBinding
 import com.example.notely.ui.user.UserViewModel
@@ -51,6 +52,12 @@ class FilesFragment : Fragment() {
         testBtn1.setOnClickListener {
             upload()
         }
+        println("- - - - - - - urls - - - - - - -")
+        for ( i in userViewModel.urls.value ?: mutableListOf() ) println(i)
+        println("- - - - - - - urls - - - - - - -")
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerView.adapter = UploadAdapter(userViewModel.urls.value ?: mutableListOf(), requireContext())
+
         return binding.root
     }
 
