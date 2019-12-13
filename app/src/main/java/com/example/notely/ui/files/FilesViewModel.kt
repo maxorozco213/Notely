@@ -18,8 +18,8 @@ import com.google.firebase.storage.FirebaseStorage
 
 class FilesViewModel : ViewModel() {
     private val PICK_PHOTO_REQUEST = 4
-    private val storageRef = FirebaseStorage.getInstance().reference.child("users")
-    private val db: DatabaseReference = FirebaseDatabase.getInstance().reference.child("users")
+    private val storageRef = FirebaseStorage.getInstance().reference.child("uploads")
+    private val db: DatabaseReference = FirebaseDatabase.getInstance().reference
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is files Fragment"
@@ -38,9 +38,8 @@ class FilesViewModel : ViewModel() {
     }
 
     fun uploadImage(uid: String, image: Uri?, context: Context, currNumFiles: Int,  currStorageSize: Long) {
-
         if (image != null) {
-            val upImage = storageRef.child("$uid/${image?.lastPathSegment}")
+            val upImage = storageRef.child("$uid/${image.lastPathSegment}")
             val uploadTask = upImage.putFile(image)
             uploadTask
                 .addOnSuccessListener {
@@ -52,7 +51,7 @@ class FilesViewModel : ViewModel() {
                     }
                     println("Transfered [${it.bytesTransferred}] bytes")
                     val meta = UserFileMetadata(currNumFiles + 1, currStorageSize + it.bytesTransferred)
-                    db.child(uid).setValue(meta)
+                    db.child("metadata/$uid").setValue(meta)
                 }
                 .addOnFailureListener { Log.i("FILE UPLOAD", "Failure") }
         } else {

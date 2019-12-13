@@ -19,7 +19,7 @@ import kotlinx.coroutines.*
 class UserViewModel : ViewModel() {
 
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
-    private val db: DatabaseReference = FirebaseDatabase.getInstance().reference.child("users")
+    private val db: DatabaseReference = FirebaseDatabase.getInstance().reference
     private val _text = MutableLiveData<String>().apply {
         value = "This is user Fragment"
     }
@@ -60,7 +60,7 @@ class UserViewModel : ViewModel() {
         println("current user = ${_user.value?.uid}")
         val uid = _user.value?.uid ?: return
         if ( dbListener == null ) {
-            dbListener = db.child(uid).addValueEventListener(metadataListener)
+            dbListener = db.child("metadata/$uid").addValueEventListener(metadataListener)
             println("listener added")
         } else
             println("listener not added")
@@ -74,7 +74,7 @@ class UserViewModel : ViewModel() {
     private fun removeListener() {
         val uid = _user.value?.uid ?: return
         if ( dbListener != null ) {
-            db.child(uid).removeEventListener(dbListener!!)
+            db.child("metadata/$uid").removeEventListener(dbListener!!)
             dbListener = null
             println("removed dangling listener")
         }
