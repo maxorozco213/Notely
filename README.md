@@ -46,7 +46,7 @@
 ---
 ## Database Using Firebase
 
-- 
+- Image Metadata is stored in a database. 
 
 ---
 
