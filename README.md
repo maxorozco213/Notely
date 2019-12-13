@@ -53,5 +53,5 @@
 - Cloud and APIs
 - Local database storage
 - Authentication
-- View Model Model View paradigm
+- Model View View Model paradigm
 - Intents and permissions
