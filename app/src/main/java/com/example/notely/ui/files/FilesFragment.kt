@@ -12,6 +12,7 @@ import android.widget.Toast
 import android.widget.Toast.LENGTH_LONG
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -48,15 +49,14 @@ class FilesFragment : Fragment() {
         testBtn2.setOnClickListener {
             filesViewModel.selectImage(this)
         }
-
         testBtn1.setOnClickListener {
             upload()
         }
-        println("- - - - - - - urls - - - - - - -")
-        for ( i in userViewModel.urls.value ?: mutableListOf() ) println(i)
-        println("- - - - - - - urls - - - - - - -")
+
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        binding.recyclerView.adapter = UploadAdapter(userViewModel.urls.value ?: mutableListOf(), requireContext())
+        userViewModel.urls.observe(this, Observer {
+            binding.recyclerView.adapter = UploadAdapter(userViewModel.urls.value ?: mutableListOf(), requireContext())
+        })
 
         return binding.root
     }
