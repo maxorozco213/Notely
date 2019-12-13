@@ -11,11 +11,11 @@
  ## - Firebase used for Authentication
  ## - Photos taken by the user can be uploaded to the cloud
 
-![Notely Logo](./Presentation/choose-login.gif?raw=true "Login")
+![Login](./Presentation/choose-login.gif?raw=true "Login")
 
 ## - User will be redirected if they are not logged in
 
-![Notely Logo](./Presentation/redirect.gif?raw=true "Redirect")
+![Redirect](./Presentation/redirect.gif?raw=true "Redirect")
 
 ---
 
@@ -26,29 +26,28 @@
 ## - Photo is then automatically opened in a cropper tool
 ## - Cropper tool will then save the cropped image to the user's phone
 
-![Notely Logo](./Presentation/take-pic-crop.gif?raw=true "Take pic")
+![Take pic](./Presentation/take-pic-crop.gif?raw=true "Take pic")
 
 ## - User can also choose to find an existing photo on their phone to crop
 
-![Notely Logo](./Presentation/choose-crop.gif?raw=true "Choose pic")
+![Choose pic](./Presentation/choose-crop.gif?raw=true "Choose pic")
 
 
 ---
 
-## User files
+## User files - Saved with Firebase
 
 ## - App allows the user to view any of their files that are on FireBase storage
 ## - User can also pick files on their phone to upload to the cloud
+## - Image Metadata is stored in a database. 
+## - Realtime database ia automatically synced for each user
 
-![Notely Logo](./Presentation/upload-recycler.gif?raw=true "Recycler")
 
----
-## Database Using Firebase
+![Recycler](./Presentation/upload-recycler.gif?raw=true "Recycler")
 
-- Image Metadata is stored in a database. 
-- Realtime database ia automatically synced for each user
 
 ---
+
 
 # Concepts
 
